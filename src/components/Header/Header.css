@@ -1,0 +1,13 @@
+#bg-video {
+    width: 100vw;
+    filter: brightness(0.9);
+    opacity: 0.9;
+}
+
+@media (max-width: 768px) {
+    #bg-video {
+        width: auto;
+        height: 90vh;
+        transform: translate(-30%, 0%);
+    }
+}
