@@ -11,7 +11,7 @@ const Header = () => {
 
   return (
 		<div>
-			<video autoPlay muted loop id="bg-video" ref={videoRef}>
+			<video autoPlay muted loop playsInline id="bg-video" ref={videoRef}>
 				<source src={`${process.env.PUBLIC_URL}/video.mp4`} type="video/mp4"/>
 				Your browser does not support the video tag.
 			</video>
