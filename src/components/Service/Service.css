@@ -1,0 +1,48 @@
+.service {
+    width: 100%;
+    text-align: center;
+}
+
+.service__main-title {
+    margin-top: 40px;
+}
+
+.service__container {
+    max-width: 1160px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.service__item {
+    flex: 1 1 300px; /* Flex basis of 300px for responsive layout */
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.service__icon {
+    width: 50px; /* Adjust based on your icon sizes */
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.service__title {
+    font-size: 18px;
+    color: #333; /* Adjust font size and color to match your theme */
+    margin-bottom: 5px;
+}
+
+.service__description {
+    font-size: 14px;
+    color: #666; /* Lighter text color for the description */
+}
+
+@media (max-width: 768px) {
+    .service__container {
+
+    }
+}
