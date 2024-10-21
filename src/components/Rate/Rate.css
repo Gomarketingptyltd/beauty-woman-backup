@@ -1,0 +1,137 @@
+.rate {
+  background-image: url('../../assets/banner2.jpg');
+  background-position-x: 90%;
+  background-position-y: 20%;
+  background-size: cover;
+  filter: brightness(0.9);
+  opacity: 0.9;
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  color: white;
+}
+
+.rate__container {
+  max-width: 1160px;
+  margin: 0 auto;
+  display: flex;
+  gap: 30px;
+}
+
+.rate__item {
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  color: black;
+}
+
+.rate__prices {
+  background-color: #F4B502;
+  padding: 30px;
+}
+
+.rate__price {
+  font-size: 32px;
+  font-weight: bold;
+}
+
+.rate__duration {
+  font-size: 18px;
+  margin-top: 5px;
+}
+
+.rate__breakdown {
+  background-color: #090909;
+  font-size: 16px;
+  padding: 20px;
+  color: #fff;
+}
+
+.rate__breakdown-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.rate__breakdown-item-top {
+  border-bottom: 3px solid #F4B502;
+}
+
+.rate__icon {
+  width: 24px;
+  height: 24px;
+  margin-right: 16px;
+}
+
+.rate__running-hour {
+  width: 1160px;
+  margin-top: 40px;
+  padding: 40px 0;
+  background-color: #000;
+  border: 2px solid #F4B502;
+}
+
+.rate__other {
+  width: 1160px;
+  margin-top: 40px;
+  text-align: left;
+}
+
+
+@media (max-width: 1200px) {
+  .rate__item {
+    width: 340px;
+  }
+  .rate__running-hour {
+    max-width: 1100px;
+  }
+
+  .rate__other {
+    max-width: 1100px;
+  }
+}
+
+@media (max-width: 1000px) {
+  .rate__container {
+    display: flex;
+    flex-direction: column;
+    padding: 40px 0;
+  }
+  .rate__item {
+    width: 450px;
+  }
+}
+
+@media (max-width: 900px) {
+  .rate__running-hour {
+    max-width: 800px;
+  }
+
+  .rate__other {
+    max-width: 800px;
+  }
+}
+
+@media (max-width: 480px) {
+  .rate__item {
+    width: 340px;
+  }
+  .rate__prices {
+    padding: 20px;
+  }
+  .rate__breakdown-item {
+    padding: 10px;
+  }
+  .rate__running-hour {
+    max-width: 340px;
+  }
+
+  .rate__other {
+    max-width: 340px;
+  }
+}
