@@ -1,10 +1,15 @@
 .header {
     background-color: transparent;
-    padding: 20px 0;
+    padding: 10px 0;
     position: fixed;
     width: 100%;
     top: 0;
     z-index: 1000;
+    transition: background-color 0.3s ease;
+}
+
+.header--scrolled {
+    background-color: #6b006b;
 }
 
 .header__container {
@@ -22,7 +27,7 @@
 }
 
 .header__logo-image {
-    width: 100px;
+    width: 80px;
 }
 
 .header__nav {
@@ -61,6 +66,15 @@
     color: #333;
 }
 
+@media (max-width: 1200px) {
+    .header__logo-image {
+        width: 60px;
+    }
+    .header__nav-link {
+        font-size: 16px;
+    }
+}
+
 @media (max-width: 1000px) {
     .header__nav {
         display: none;
@@ -87,5 +101,11 @@
 
     .header__nav-item {
         margin: 10px 0;
+    }
+}
+
+@media (max-width: 500px) {
+    .header__logo-image {
+        width: 40px;
     }
 }
