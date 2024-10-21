@@ -3,6 +3,7 @@ import Header from "../components/Header/Header";
 import Banner from "../components/Banner/Banner";
 import Service from "../components/Service/Service";
 import Rate from "../components/Rate/Rate";
+import Girl from "../components/Girl/Girl";
 
 const HomePage = () => {
   return (
@@ -11,6 +12,7 @@ const HomePage = () => {
 			<Banner />
 			<Service />
 			<Rate />
+			<Girl />
     </div>
   );
 };

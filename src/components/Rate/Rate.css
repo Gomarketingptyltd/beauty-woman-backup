@@ -5,13 +5,14 @@
   background-size: cover;
   filter: brightness(0.9);
   opacity: 0.9;
-  height: 80vh;
+  height: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   position: relative;
   color: white;
+  padding: 40px;
 }
 
 .rate__container {
@@ -121,6 +122,9 @@
 }
 
 @media (max-width: 480px) {
+  .rate {
+    padding: 0;
+  }
   .rate__item {
     width: 340px;
   }

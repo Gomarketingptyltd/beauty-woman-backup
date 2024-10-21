@@ -35,8 +35,8 @@
 }
 
 .banner__button {
-    background-color: #ff4d4d;
-    color: #ffffff;
+    background-color: #F4B502;
+    color: #000;
     border: none;
     padding: 10px 20px;
     font-size: 1rem;
@@ -47,6 +47,7 @@
 
 .banner__button:hover {
     background-color: #e60000;
+    color: #fff;
 }
 
 /* Responsive styles */
