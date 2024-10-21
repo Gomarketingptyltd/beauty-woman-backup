@@ -108,6 +108,9 @@
 }
 
 @media (max-width: 900px) {
+  .rate {
+    height: auto;
+  }
   .rate__running-hour {
     max-width: 800px;
   }
@@ -129,6 +132,7 @@
   }
   .rate__running-hour {
     max-width: 340px;
+    margin-top: 10px;
   }
 
   .rate__other {

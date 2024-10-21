@@ -22,11 +22,11 @@ const Rate = () => {
 						<div className="rate__breakdown">
 							<div className="rate__breakdown-item rate__breakdown-item-top">
 								<img src={woman} className="rate__icon" alt="woman"/>
-								<span>Lady: {rate.lady}</span>
+								<span>Lady: &nbsp;{rate.lady}</span>
 							</div>
 							<div className="rate__breakdown-item">
 								<img src={room} className="rate__icon" alt="woman"/>
-								<span>Room: {rate.room}</span>
+								<span>Room: &nbsp;{rate.room}</span>
 							</div>
 						</div>
 					</div>
@@ -37,8 +37,7 @@ const Rate = () => {
 			</div>
 			<p className="rate__other">
 				These rates are fully inclusive of erotic massage, oral and sex services. Depending on the services you want,
-				some of our girls will charge extra. To make sure you have the best possible time, discuss your desires with our
-				team. We'll find you someone who offers the services you're after.
+				some of our girls will charge extra.
 			</p>
 		</div>
 	);
