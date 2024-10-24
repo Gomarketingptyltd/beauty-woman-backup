@@ -11,19 +11,16 @@
 
 .about h3 {
     font-size: 1.2em;
-    margin-bottom: 20px;
+    /*margin-bottom: 20px;*/
 }
 
 .about__container {
     display: flex;
     align-items: center;
+    padding: 30px;
     max-width: 1160px;
     margin: 0 auto;
     gap: 20px;
-}
-
-.about__image-container, .about__content {
-    flex-basis: 50%;
 }
 
 .about__image {
@@ -42,6 +39,14 @@
     display: flex;
     align-items: center;
     cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.reason__header:hover .reason__title {
+    color: #e60000;
+}
+.reason__header:hover .reason__toggle {
+    background-color: #e60000; /* 当hover在reason__header时，reason__toggle背景色也会变 */
 }
 
 .reason__toggle {
@@ -50,7 +55,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #ff4d4f;
+    background-color: #737171;
     color: #fff;
     font-size: 16px;
     font-weight: bold;
@@ -59,13 +64,21 @@
     transition: background-color 0.3s ease;
 }
 
-.reason__toggle:hover {
-    background-color: #e60000; /* hover效果 */
-}
-
 .reason__title {
     font-size: 1.5em;
-    color: #ff4d4f;
+    color: #000; /* 原本的黑色 */
+}
+
+.reason__description-container {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease, opacity 0.5s ease;
+    opacity: 0;
+}
+
+.reason__description-container.expanded {
+    max-height: 200px; /* 根据内容高度设置合适的值 */
+    opacity: 1;
 }
 
 .reason__description {
@@ -75,30 +88,19 @@
     text-align: start;
 }
 
-/* 响应式设计 */
-/*@media (min-width: 768px) {*/
-/*    .about__container {*/
-/*        flex-direction: row;*/
-/*        justify-content: space-between;*/
-/*    }*/
+@media (max-width: 900px) {
+    .about__container {
+        flex-direction: column;
+    }
+    .about__image {
+        height: 520px;
+    }
+}
 
-
-/*}*/
-
-/*@media (max-width: 480px) {*/
-/*    .about {*/
-/*        padding: 0;*/
-/*    }*/
-
-/*    .about__container {*/
-/*        flex-direction: column;*/
-/*    }*/
-
-/*    .about__image {*/
-/*        max-width: 90%;*/
-/*    }*/
-
-/*    .about__content {*/
-/*        padding: 10px;*/
-/*    }*/
-/*}*/
+@media (max-width: 480px) {
+    .about__image {
+        height: 220px;
+        width: 100%;
+        object-fit: cover;
+    }
+}
