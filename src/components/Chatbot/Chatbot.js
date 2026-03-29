@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-import { getQuickReplies, getAnswer, getFallback } from './chatbot-kb';
+import { getAnswer, getFallback } from './chatbot-kb';
 import './Chatbot.css';
 
 const BOT_DELAY = 600;
@@ -123,8 +123,6 @@ export default function Chatbot() {
     ask(trimmed);
   };
 
-  const quickReplies = getQuickReplies(lang);
-
   return (
     <>
       {/* Toggle Button */}
@@ -179,15 +177,6 @@ export default function Chatbot() {
               )}
               {typing && <TypingIndicator />}
               <div ref={bottomRef} />
-            </div>
-
-            {/* Quick Replies */}
-            <div className="cb-quick">
-              {quickReplies.map(item => (
-                <button key={item.id} className="cb-quick__btn" onClick={() => ask(item.q)}>
-                  {item.q}
-                </button>
-              ))}
             </div>
 
             {/* Input */}
