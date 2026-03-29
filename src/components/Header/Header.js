@@ -3,8 +3,8 @@ import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import './Header.css';
 
-const NAV_KEYS = ['home', 'services', 'rates', 'ladies', 'about'];
-const SECTION_IDS = ['hero', 'services', 'rates', 'ladies', 'about'];
+const NAV_KEYS = ['home', 'services', 'rates', 'ladies', 'about', 'gallery'];
+const SECTION_IDS = ['hero', 'services', 'rates', 'ladies', 'about', 'gallery'];
 
 const Header = () => {
   const { t, i18n } = useTranslation();

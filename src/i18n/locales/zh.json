@@ -9,7 +9,8 @@
     "ladies": "佳丽",
     "about": "关于",
     "joinUs": "招募",
-    "contact": "联系"
+    "contact": "联系",
+    "gallery": "图库"
   },
   "hero": {
     "tagline": "悉尼顶级",
@@ -206,6 +207,11 @@
       "phoneJpLabel": "电话（日语）",
       "qrHint": "扫码添加 WhatsApp"
     }
+  },
+  "gallery": {
+    "label": "场馆实景",
+    "title": "空间赏析",
+    "subtitle": "超过2400平方米的奢华空间——每间套房，各自成一个感官世界"
   },
   "footer": {
     "tagline": "悉尼顶级奢华感官娱乐",

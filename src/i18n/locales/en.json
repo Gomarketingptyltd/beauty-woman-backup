@@ -9,7 +9,8 @@
     "ladies": "LADIES",
     "about": "ABOUT",
     "joinUs": "JOIN US",
-    "contact": "CONTACT"
+    "contact": "CONTACT",
+    "gallery": "GALLERY"
   },
   "hero": {
     "tagline": "Sydney's Premier",
@@ -206,6 +207,11 @@
       "phoneJpLabel": "Phone (Japanese)",
       "qrHint": "Scan to add on WhatsApp"
     }
+  },
+  "gallery": {
+    "label": "Our Venue",
+    "title": "The Space",
+    "subtitle": "Purpose-built luxury across 2,400 sqm — every suite a world of its own"
   },
   "footer": {
     "tagline": "Sydney's Premier Luxury Sensory Entertainment",
