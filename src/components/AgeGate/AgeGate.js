@@ -8,7 +8,7 @@ const AgeGate = ({ onEnter }) => {
   const [exiting, setExiting] = useState(false);
 
   const handleEnter = () => {
-    sessionStorage.setItem('on_age_verified', 'true');
+    try { sessionStorage.setItem('on_age_verified', 'true'); } catch {}
     onEnter();
   };
 

@@ -8,8 +8,12 @@ import AnnouncementBar from './components/AnnouncementBar/AnnouncementBar';
 import HomePage from './views/HomePage';
 import JoinUs from './views/JoinUs';
 
+function safeSession(key) {
+  try { return sessionStorage.getItem(key); } catch { return null; }
+}
+
 function App() {
-  const verified = sessionStorage.getItem('on_age_verified') === 'true';
+  const verified = safeSession('on_age_verified') === 'true';
   const [ageOk, setAgeOk] = useState(verified);
 
   return (
