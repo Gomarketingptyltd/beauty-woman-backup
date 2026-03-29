@@ -1,0 +1,150 @@
+{
+  "nav": {
+    "home": "HOME",
+    "services": "SERVICES",
+    "rates": "RATES",
+    "ladies": "LADIES",
+    "about": "ABOUT",
+    "joinUs": "JOIN US",
+    "contact": "CONTACT"
+  },
+  "hero": {
+    "tagline": "Sydney's Premier",
+    "headline": "Luxury Sensory\nEntertainment",
+    "subline": "An immersive world of elegance, discretion & desire",
+    "cta": "Explore",
+    "status": "Open Daily · 24 Hours",
+    "badge": "Est. Sydney, AU"
+  },
+  "agegate": {
+    "title": "Age Verification Required",
+    "body": "This website contains content intended for adults aged 18 and over. By entering you confirm you are of legal age in your jurisdiction.",
+    "enter": "Enter — I am 18+",
+    "leave": "Exit",
+    "disclaimer": "By entering, you agree to our Terms of Service and Privacy Policy."
+  },
+  "services": {
+    "label": "What We Offer",
+    "title": "World-Class Amenities",
+    "subtitle": "Every detail curated for your comfort and discretion",
+    "items": {
+      "discreet": { "title": "Discreet Location", "desc": "Secure, private entry with complete confidentiality" },
+      "parking": { "title": "Free Parking", "desc": "Ample, secure private parking available" },
+      "ladies": { "title": "Elite Companions", "desc": "The finest selection Sydney has to offer" },
+      "satisfaction": { "title": "Five-Star Experience", "desc": "Premium service guaranteed, every visit" },
+      "atm": { "title": "EFTPOS & ATM", "desc": "All payment methods conveniently accepted" },
+      "climate": { "title": "Climate Controlled", "desc": "Luxuriously appointed, temperature-perfect suites" }
+    }
+  },
+  "rates": {
+    "label": "Investment",
+    "title": "Rates & Sessions",
+    "subtitle": "Transparent pricing — no surprises",
+    "lady": "Companion",
+    "room": "Suite",
+    "hours": "Open 7 days · Sunday–Thursday 10am–5am · Friday & Saturday 24 Hours",
+    "note": "Rates include full service. Select companions may apply additional fees based on requested services.",
+    "book": "Book Now"
+  },
+  "ladies": {
+    "label": "Our Companions",
+    "title": "Meet the Ladies",
+    "subtitle": "An ever-changing roster of exquisite companions",
+    "age": "Age",
+    "more": "View More"
+  },
+  "about": {
+    "label": "Our Story",
+    "title": "Why Ocean Noir?",
+    "subtitle": "Sydney's most distinguished sensory experience",
+    "reasons": [
+      {
+        "title": "Unmatched Elegance",
+        "body": "Over 2,400 sqm of purpose-built luxury: waterbed suites, steam rooms, stage suites and a private lounge — every space designed to elevate the senses."
+      },
+      {
+        "title": "Complete Discretion",
+        "body": "Your privacy is our priority. Secure access, discreet location, and a team trained to the highest standards of professional confidentiality."
+      },
+      {
+        "title": "Elite Companions",
+        "body": "We curate a diverse, international roster of companions. Beauty, personality, and professionalism in equal measure."
+      },
+      {
+        "title": "Safety & Wellbeing",
+        "body": "Medical-grade hygiene protocols, 24/7 on-site security, and weekly health checks keep every guest and companion safe."
+      }
+    ]
+  },
+  "joinUs": {
+    "hero": {
+      "label": "Careers at Ocean Noir",
+      "title": "Build Your Stage",
+      "subtitle": "A 2,400+ sqm luxury flagship · Sydney's most talked-about opening"
+    },
+    "notice": "All applicants must hold a valid Australian work visa, verifiable via VEVO.",
+    "roles": {
+      "label": "Open Positions",
+      "title": "Current Opportunities",
+      "companion": {
+        "title": "Companion / Therapist",
+        "count": "40 Openings",
+        "paths": ["Full-service companion — high-reward, premium clientele", "Massage & bath specialist — focused relaxation therapies"],
+        "pay": "$8,000 – $20,000+ / week (uncapped)",
+        "payNote": "Commission + performance bonus, weekly reference earnings"
+      },
+      "reception": {
+        "title": "Reception",
+        "count": "4 Openings",
+        "paths": ["Guest reception & first impressions", "Booking management & room coordination"],
+        "pay": "From $30 / hr + bonuses",
+        "payNote": "Multilingual candidates warmly welcomed"
+      },
+      "housekeeping": {
+        "title": "Housekeeping",
+        "count": "4 Openings",
+        "paths": ["Medical-grade hygiene across all suites", "Waterbed, steam-room & public-area maintenance"],
+        "pay": "From $30 / hr",
+        "payNote": "Full training provided on UV/high-temp sanitising equipment"
+      },
+      "specialist": {
+        "title": "Creative Specialists",
+        "count": "2 Openings",
+        "paths": ["Makeup artist — fast, versatile aesthetic looks", "Photographer — premium space & portrait work"],
+        "pay": "Per session — generous rates",
+        "payNote": "Flexible scheduling, premium creative environment"
+      }
+    },
+    "perks": {
+      "label": "Why Join Us",
+      "title": "The Ocean Noir Difference",
+      "items": [
+        { "title": "Multicultural & Inclusive", "body": "We celebrate Sydney's diversity. Talent comes first, background second." },
+        { "title": "World-Class Facilities", "body": "2,400 sqm newly built. Waterbeds, steam rooms, stage suites, staff lounge & pantry." },
+        { "title": "Premium Clientele", "body": "Flagship backing drives a consistent flow of high-value private and business clients." },
+        { "title": "Safety First", "body": "24/7 security, medical-grade sanitisation and professional makeup & photography support." }
+      ]
+    },
+    "apply": {
+      "title": "Ready to Apply?",
+      "subtitle": "Send your details and we'll be in touch within 24 hours",
+      "namePlaceholder": "Your Name",
+      "phonePlaceholder": "Phone / WeChat",
+      "rolePlaceholder": "Position of Interest",
+      "messagePlaceholder": "Tell us a little about yourself (optional)",
+      "submit": "Submit Application",
+      "success": "Thank you! We'll be in touch shortly.",
+      "roles": ["Companion / Therapist", "Reception", "Housekeeping", "Makeup Artist", "Photographer"]
+    }
+  },
+  "footer": {
+    "tagline": "Sydney's Premier Luxury Sensory Entertainment",
+    "rights": "© 2025 Ocean Noir. All rights reserved.",
+    "legal": "Adults only (18+). Fully licensed. Compliant with NSW regulations.",
+    "links": {
+      "privacy": "Privacy Policy",
+      "terms": "Terms of Service",
+      "joinUs": "Join Our Team"
+    }
+  }
+}

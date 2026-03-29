@@ -1,0 +1,300 @@
+.joinus {
+  background: var(--color-obsidian);
+  padding-top: 72px;
+}
+
+/* ─── Hero ───────────────────────────────────────── */
+.joinus__hero {
+  position: relative;
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-charcoal);
+  overflow: hidden;
+}
+
+.joinus__hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 70% 60% at 50% 100%, rgba(201,168,76,0.1) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 40% at 80% 20%, rgba(139,26,42,0.1) 0%, transparent 60%);
+}
+
+.joinus__hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, var(--color-obsidian) 0%, transparent 40%, var(--color-obsidian) 100%);
+  opacity: 0.6;
+}
+
+.joinus__hero-content {
+  position: relative;
+  z-index: 1;
+  padding: var(--space-2xl) var(--space-xl);
+  max-width: 760px;
+}
+
+.joinus__hero-title {
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  color: var(--color-white);
+  margin: var(--space-lg) 0 0;
+}
+
+.joinus__hero-subtitle {
+  font-size: clamp(0.85rem, 2vw, 1rem);
+  color: var(--color-text-secondary);
+  letter-spacing: 0.06em;
+  margin-top: var(--space-lg);
+}
+
+/* ─── Notice Band ──────────────────────────────── */
+.joinus__notice-band {
+  background: rgba(201,168,76,0.06);
+  border-top: 1px solid rgba(201,168,76,0.2);
+  border-bottom: 1px solid rgba(201,168,76,0.2);
+  padding: var(--space-lg) var(--space-xl);
+}
+
+.joinus__notice {
+  font-size: 0.85rem;
+  color: var(--color-gold);
+  text-align: center;
+  letter-spacing: 0.04em;
+}
+
+/* ─── Section Headers ──────────────────────────── */
+.joinus__section-head {
+  margin-bottom: var(--space-2xl);
+}
+
+.joinus__section-head .label-gold {
+  display: block;
+  margin-bottom: var(--space-md);
+}
+
+/* ─── Roles ─────────────────────────────────────── */
+.joinus__roles {
+  background: var(--color-midnight);
+  border-top: 1px solid var(--color-border);
+}
+
+.joinus__roles-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-lg);
+}
+
+.role-card {
+  border: 1px solid var(--color-border);
+  background: var(--color-charcoal);
+  padding: var(--space-xl);
+  transition: border-color var(--transition-base), box-shadow var(--transition-base);
+}
+
+.role-card:hover {
+  border-color: rgba(201,168,76,0.35);
+  box-shadow: var(--shadow-card);
+}
+
+.role-card__icon {
+  font-size: 1.2rem;
+  color: var(--color-gold);
+  margin-bottom: var(--space-md);
+  opacity: 0.7;
+}
+
+.role-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: var(--space-md);
+  gap: var(--space-md);
+}
+
+.role-card__title {
+  font-family: var(--font-serif);
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: var(--color-text-primary);
+}
+
+.role-card__count {
+  font-family: var(--font-sans);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  flex-shrink: 0;
+  border: 1px solid rgba(201,168,76,0.3);
+  padding: 3px 10px;
+}
+
+.role-card__paths {
+  list-style: none;
+  margin-bottom: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.role-card__path {
+  font-size: 0.88rem;
+  color: var(--color-text-secondary);
+  padding-left: 16px;
+  position: relative;
+}
+
+.role-card__path::before {
+  content: '–';
+  position: absolute;
+  left: 0;
+  color: var(--color-gold);
+  opacity: 0.5;
+}
+
+.role-card__pay-block {
+  border-top: 1px solid var(--color-border);
+  padding-top: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.role-card__pay {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  color: var(--color-gold);
+}
+
+.role-card__pay-note {
+  font-size: 0.78rem;
+  color: var(--color-muted);
+}
+
+/* ─── Perks ──────────────────────────────────────── */
+.joinus__perks {
+  background: var(--color-obsidian);
+}
+
+.joinus__perks-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-md);
+}
+
+.perk-card {
+  border: 1px solid var(--color-border);
+  padding: var(--space-xl);
+  background: var(--color-charcoal);
+}
+
+.perk-card__title {
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  font-weight: 400;
+  color: var(--color-gold);
+  margin-bottom: var(--space-sm);
+}
+
+.perk-card__body {
+  font-size: 0.88rem;
+  color: var(--color-text-secondary);
+  line-height: 1.8;
+}
+
+/* ─── Apply Form ─────────────────────────────────── */
+.joinus__apply {
+  background: var(--color-midnight);
+  border-top: 1px solid var(--color-border);
+}
+
+.joinus__apply-subtitle {
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+}
+
+.joinus__form {
+  max-width: 680px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.joinus__form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-md);
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-field__input {
+  background: var(--color-charcoal);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-primary);
+  font-family: var(--font-sans);
+  font-size: 0.88rem;
+  padding: 14px 16px;
+  outline: none;
+  transition: border-color var(--transition-base);
+  border-radius: 0;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.form-field__input::placeholder {
+  color: var(--color-muted);
+}
+
+.form-field__input:focus {
+  border-color: rgba(201,168,76,0.5);
+}
+
+.form-field__select {
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23c9a84c' stroke-width='1.5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  padding-right: 40px;
+}
+
+.form-field__select option {
+  background: var(--color-charcoal);
+  color: var(--color-text-primary);
+}
+
+.form-field__textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.joinus__submit {
+  min-width: 220px;
+  margin-top: var(--space-sm);
+}
+
+.joinus__success {
+  font-family: var(--font-serif);
+  font-size: 1.2rem;
+  color: var(--color-gold);
+  padding: var(--space-2xl) 0;
+}
+
+/* ─── Responsive ─────────────────────────────────── */
+@media (max-width: 768px) {
+  .joinus__roles-grid,
+  .joinus__perks-grid {
+    grid-template-columns: 1fr;
+  }
+  .joinus__form-row {
+    grid-template-columns: 1fr;
+  }
+}

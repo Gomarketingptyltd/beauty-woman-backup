@@ -1,13 +1,214 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/* ═══════════════════════════════════════════════
+   Ocean Noir — Global Design Tokens & Base Styles
+   ═══════════════════════════════════════════════ */
+
+:root {
+  /* Color Palette */
+  --color-obsidian:      #0a0a0f;
+  --color-midnight:      #12121a;
+  --color-charcoal:      #1c1c28;
+  --color-surface:       #22222f;
+  --color-border:        #2e2e3e;
+  --color-muted:         #6b6b80;
+  --color-text-secondary:#a0a0b2;
+  --color-text-primary:  #e8e8f0;
+  --color-white:         #ffffff;
+
+  /* Gold Accent */
+  --color-gold:          #c9a84c;
+  --color-gold-light:    #e4c46e;
+  --color-gold-dark:     #9e7e30;
+  --color-gold-glow:     rgba(201,168,76,0.18);
+
+  /* Crimson Accent */
+  --color-crimson:       #8b1a2a;
+  --color-crimson-light: #b3253a;
+
+  /* Typography */
+  --font-serif:          'Cormorant Garamond', 'Noto Serif SC', Georgia, serif;
+  --font-sans:           'Montserrat', 'Noto Serif SC', -apple-system, sans-serif;
+  --font-zh:             'Noto Serif SC', 'PingFang SC', 'Microsoft YaHei', serif;
+
+  /* Spacing Scale */
+  --space-xs:   4px;
+  --space-sm:   8px;
+  --space-md:   16px;
+  --space-lg:   24px;
+  --space-xl:   40px;
+  --space-2xl:  64px;
+  --space-3xl:  96px;
+
+  /* Border Radius */
+  --radius-sm:  4px;
+  --radius-md:  8px;
+  --radius-lg:  16px;
+
+  /* Transitions */
+  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-base: 0.3s var(--ease-smooth);
+  --transition-slow: 0.6s var(--ease-smooth);
+
+  /* Shadows */
+  --shadow-glow: 0 0 30px rgba(201,168,76,0.15);
+  --shadow-card:  0 8px 32px rgba(0,0,0,0.5);
+  --shadow-deep:  0 24px 64px rgba(0,0,0,0.8);
+
+  /* Max-width */
+  --max-w: 1200px;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* ─── Reset & Base ─────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background-color: var(--color-obsidian);
+  color: var(--color-text-primary);
+  font-family: var(--font-sans);
+  font-weight: 300;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* ─── Typography Utilities ─────────────────────── */
+.heading-display {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  letter-spacing: 0.06em;
+  line-height: 1.15;
+}
+
+.heading-section {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  color: var(--color-text-primary);
+}
+
+.label-gold {
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+}
+
+/* ─── Gold Divider ─────────────────────────────── */
+.gold-divider {
+  width: 60px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
+  margin: var(--space-lg) auto;
+}
+
+/* ─── Scrollbar ────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-obsidian);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-gold-dark);
+  border-radius: 3px;
+}
+
+/* ─── Selection ────────────────────────────────── */
+::selection {
+  background: var(--color-gold-dark);
+  color: var(--color-obsidian);
+}
+
+/* ─── Utility Classes ──────────────────────────── */
+.text-center  { text-align: center; }
+.text-gold    { color: var(--color-gold); }
+.fw-300       { font-weight: 300; }
+.fw-400       { font-weight: 400; }
+.fw-600       { font-weight: 600; }
+
+.section-padding {
+  padding: var(--space-3xl) var(--space-xl);
+}
+
+.container {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 var(--space-xl);
+}
+
+/* ─── Button Base ──────────────────────────────── */
+.btn {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 14px 36px;
+  border: none;
+  cursor: pointer;
+  transition: var(--transition-base);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-gold {
+  background: transparent;
+  border: 1px solid var(--color-gold);
+  color: var(--color-gold);
+}
+
+.btn-gold::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--color-gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s var(--ease-smooth);
+  z-index: 0;
+}
+
+.btn-gold:hover::before {
+  transform: scaleX(1);
+}
+
+.btn-gold:hover {
+  color: var(--color-obsidian);
+}
+
+.btn-gold span, .btn-gold .btn-text {
+  position: relative;
+  z-index: 1;
+}
+
+.btn-solid-gold {
+  background: var(--color-gold);
+  color: var(--color-obsidian);
+  border: 1px solid var(--color-gold);
+}
+
+.btn-solid-gold:hover {
+  background: var(--color-gold-light);
+  border-color: var(--color-gold-light);
+}
+
+/* ─── App Shell ────────────────────────────────── */
+.App {
+  min-height: 100vh;
+  background-color: var(--color-obsidian);
 }

@@ -1,56 +1,71 @@
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
+import { useTranslation } from 'react-i18next';
 import './About.css';
-import sexy from '../../assets/about/about-image.jpg';
+import aboutImg from '../../assets/about/about-image.jpg';
 
 const About = () => {
-	// 用于存储每个理由的展开状态
-	const [expanded, setExpanded] = useState({});
+  const { t } = useTranslation();
+  const [open, setOpen] = useState(null);
+  const reasons = t('about.reasons', { returnObjects: true });
 
-	// 切换展开和隐藏
-	const toggleReason = (id) => {
-		setExpanded(prevState => ({
-			...prevState,
-			[id]: !prevState[id] // 切换当前id对应的状态
-		}));
-	};
+  return (
+    <section id="about" className="about section-padding">
+      <div className="container">
+        <div className="about__header text-center">
+          <p className="label-gold about__label">{t('about.label')}</p>
+          <h2 className="heading-section">{t('about.title')}</h2>
+          <div className="gold-divider" />
+          <p className="about__subtitle">{t('about.subtitle')}</p>
+        </div>
 
-	const reasons = [
-		{ id: 1, title: "Best Service Guaranteed", reason: "We pride ourselves on the quality of our service, and are well known for having beautiful yet very friendly girls. Indulge your wildest fantasies with one... two or more of our lovely ladies. " },
-		{ id: 2, title: "Everyday New Faces Ready", reason: "We constantly update our lineup to ensure you have new, exciting experiences." },
-		{ id: 3, title: "The best ladies Melbourne ", reason: "We select only the finest and friendliest ladies for our clientele." }
-	];
+        <div className="about__body">
+          <motion.div
+            className="about__image-col"
+            initial={{ opacity: 0, x: -40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
+            viewport={{ once: true }}
+          >
+            <div className="about__image-frame">
+              <img src={aboutImg} alt="Ocean Noir" className="about__image" />
+              <div className="about__image-border" />
+            </div>
+          </motion.div>
 
-	return (
-		<div className="about">
-			<h1>Scarlet Lady Asian Brothel and Escort</h1>
-			<h3>A new-style gentleman's parlour in Melbourne</h3>
-			<div className="about__container">
-				<div className="about__image-container">
-					<img src={sexy} alt="Scarlet Lady" className="about__image" />
-				</div>
-				<div className="about__content">
-					<h2>Why Choose Us?</h2>
-					<div className="reasons">
-						{reasons.map((item) => (
-							<div key={item.id} className="reason">
-								<div className="reason__header" onClick={() => toggleReason(item.id)}>
-									<div className="reason__toggle">
-										{expanded[item.id] ? '-' : '+'}
-									</div>
-									<h3 className="reason__title">{item.title}</h3>
-								</div>
-								<div
-									className={`reason__description-container ${expanded[item.id] ? 'expanded' : ''}`}
-								>
-									<p className="reason__description">{item.reason}</p>
-								</div>
-							</div>
-						))}
-					</div>
-				</div>
-			</div>
-		</div>
-	);
+          <motion.div
+            className="about__content-col"
+            initial={{ opacity: 0, x: 40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.15, ease: [0.4, 0, 0.2, 1] }}
+            viewport={{ once: true }}
+          >
+            <div className="about__accordion">
+              {reasons.map((item, i) => {
+                const isOpen = open === i;
+                return (
+                  <div key={i} className={`accordion-item ${isOpen ? 'accordion-item--open' : ''}`}>
+                    <button
+                      className="accordion-item__header"
+                      onClick={() => setOpen(isOpen ? null : i)}
+                      aria-expanded={isOpen}
+                    >
+                      <span className="accordion-item__index">0{i + 1}</span>
+                      <span className="accordion-item__title">{item.title}</span>
+                      <span className="accordion-item__icon">{isOpen ? '−' : '+'}</span>
+                    </button>
+                    <div className={`accordion-item__body ${isOpen ? 'accordion-item__body--open' : ''}`}>
+                      <p className="accordion-item__text">{item.body}</p>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
 };
 
 export default About;

@@ -1,68 +1,102 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import './Header.css';
-import { Link } from "react-router-dom";
+
+const NAV_KEYS = ['home', 'services', 'rates', 'ladies', 'about'];
+const SECTION_IDS = ['hero', 'services', 'rates', 'ladies', 'about'];
 
 const Header = () => {
-	const [isMenuOpen, setIsMenuOpen] = useState(false);
-	const [isScrolled, setIsScrolled] = useState(false);
+  const { t, i18n } = useTranslation();
+  const location = useLocation();
+  const isHome = location.pathname === '/' || location.pathname === '/en';
+  const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState('hero');
 
-	const toggleMenu = () => {
-		setIsMenuOpen(!isMenuOpen);
-	};
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 80);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
-	// Add scroll event listener to handle header background color change
-	useEffect(() => {
-		const handleScroll = () => {
-			if (window.scrollY > 140) {
-				setIsScrolled(true);
-			} else {
-				setIsScrolled(false);
-			}
-		};
+  useEffect(() => {
+    if (!isHome) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) setActiveSection(entry.target.id);
+        });
+      },
+      { rootMargin: '-40% 0px -55% 0px' }
+    );
+    SECTION_IDS.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+    return () => observer.disconnect();
+  }, [isHome]);
 
-		window.addEventListener("scroll", handleScroll);
+  const scrollTo = useCallback((id) => {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+    setMenuOpen(false);
+  }, []);
 
-		// Cleanup event listener on component unmount
-		return () => {
-			window.removeEventListener("scroll", handleScroll);
-		};
-	}, []);
+  const toggleLang = () => {
+    const next = i18n.language === 'en' ? 'zh' : 'en';
+    i18n.changeLanguage(next);
+    localStorage.setItem('on_lang', next);
+  };
 
-	const navItems = [
-		{ name: "HOME", path: "/" },
-		{ name: "SERVICE", path: "/" },
-		{ name: "RATE", path: "/" },
-		{ name: "GIRLS", path: "/" },
-		{ name: "ABOUT", path: "/" },
-		{ name: "CONTACT", path: "/" }
-	];
+  const navItems = isHome
+    ? NAV_KEYS.map((k, i) => ({ key: k, sectionId: SECTION_IDS[i] }))
+    : [];
 
-	return (
-		<header className={`header ${isScrolled ? 'header--scrolled' : ''}`}>
-			<div className="header__container">
-				<div className="header__logo">
-					<img className="header__logo-image" src={`${process.env.PUBLIC_URL}/logo.svg`} alt="Beauty Women" />
-					{/*<span className="header__logo-text">Scarlet Lady</span>*/}
-				</div>
-				<nav className={`header__nav ${isMenuOpen ? 'header__nav--open' : ''}`}>
-					<ul className="header__nav-list">
-						{navItems.map(item => (
-							<li className="header__nav-item" key={item.name}>
-								<Link className="header__nav-link" to={item.path}>
-									{item.name}
-								</Link>
-							</li>
-						))}
-					</ul>
-				</nav>
-				<div className="header__hamburger-menu" onClick={toggleMenu}>
-					<div className="header__hamburger-bar"></div>
-					<div className="header__hamburger-bar"></div>
-					<div className="header__hamburger-bar"></div>
-				</div>
-			</div>
-		</header>
-	);
+  return (
+    <header className={`header ${scrolled ? 'header--scrolled' : ''} ${menuOpen ? 'header--open' : ''}`}>
+      <div className="header__inner">
+        <Link to="/" className="header__brand" onClick={() => setMenuOpen(false)}>
+          <span className="header__brand-name">OCEAN NOIR</span>
+          <span className="header__brand-line" />
+        </Link>
+
+        {isHome && (
+          <nav className={`header__nav ${menuOpen ? 'header__nav--visible' : ''}`}>
+            {navItems.map(({ key, sectionId }) => (
+              <button
+                key={key}
+                className={`header__nav-link ${activeSection === sectionId ? 'header__nav-link--active' : ''}`}
+                onClick={() => scrollTo(sectionId)}
+              >
+                {t(`nav.${key}`)}
+              </button>
+            ))}
+            <Link
+              to="/join-us"
+              className="header__nav-link header__nav-link--join"
+              onClick={() => setMenuOpen(false)}
+            >
+              {t('nav.joinUs')}
+            </Link>
+          </nav>
+        )}
+
+        <div className="header__controls">
+          <button className="header__lang-btn" onClick={toggleLang} title="Switch language">
+            {i18n.language === 'en' ? '中文' : 'EN'}
+          </button>
+          <button
+            className={`header__hamburger ${menuOpen ? 'header__hamburger--open' : ''}`}
+            onClick={() => setMenuOpen(v => !v)}
+            aria-label="Toggle menu"
+          >
+            <span /><span /><span />
+          </button>
+        </div>
+      </div>
+    </header>
+  );
 };
 
 export default Header;

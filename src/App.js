@@ -1,17 +1,30 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Route, Routes } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
+import './i18n/index.js';
 import './App.css';
-import {Route, Routes} from "react-router-dom";
-import HomePage from "./views/HomePage";
+import AgeGate from './components/AgeGate/AgeGate';
+import HomePage from './views/HomePage';
+import JoinUs from './views/JoinUs';
 
 function App() {
-
+  const verified = sessionStorage.getItem('on_age_verified') === 'true';
+  const [ageOk, setAgeOk] = useState(verified);
 
   return (
-    <div className="App">
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-      </Routes>
-    </div>
+    <HelmetProvider>
+      {!ageOk && <AgeGate onEnter={() => setAgeOk(true)} />}
+      {ageOk && (
+        <div className="App">
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/en" element={<HomePage />} />
+            <Route path="/join-us" element={<JoinUs />} />
+            <Route path="/en/join-us" element={<JoinUs />} />
+          </Routes>
+        </div>
+      )}
+    </HelmetProvider>
   );
 }
 
