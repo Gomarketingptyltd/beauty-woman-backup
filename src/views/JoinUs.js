@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { Helmet } from 'react-helmet-async';
@@ -22,18 +22,6 @@ const JoinUs = () => {
     { key: 'housekeeping',icon: '◇' },
     { key: 'specialist',  icon: '✧' },
   ];
-
-  const [form, setForm] = useState({ name: '', phone: '', role: '', message: '' });
-  const [submitted, setSubmitted] = useState(false);
-
-  const handleChange = (e) => setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setSubmitted(true);
-  };
-
-  const applyRoles = t('joinUs.apply.roles', { returnObjects: true });
 
   return (
     <>
@@ -120,80 +108,80 @@ const JoinUs = () => {
           </div>
         </section>
 
-        {/* ── Apply Form ─────────────────────────────── */}
-        <section className="joinus__apply section-padding">
+        {/* ── Contact ────────────────────────────────── */}
+        <section id="apply" className="joinus__apply section-padding">
           <div className="container">
             <div className="joinus__section-head text-center">
+              <p className="label-gold">{t('joinUs.apply.contactLabel')}</p>
               <h2 className="heading-section">{t('joinUs.apply.title')}</h2>
               <div className="gold-divider" />
               <p className="joinus__apply-subtitle">{t('joinUs.apply.subtitle')}</p>
             </div>
 
-            {submitted ? (
-              <motion.p
-                className="joinus__success text-center"
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
+            <div className="contact-grid">
+
+              {/* Email */}
+              <motion.a
+                href="mailto:oceannoir580@gmail.com"
+                className="contact-card"
+                {...fadeUp(0.1)}
               >
-                {t('joinUs.apply.success')}
-              </motion.p>
-            ) : (
-              <form className="joinus__form" onSubmit={handleSubmit}>
-                <div className="joinus__form-row">
-                  <div className="form-field">
-                    <input
-                      type="text"
-                      name="name"
-                      className="form-field__input"
-                      placeholder={t('joinUs.apply.namePlaceholder')}
-                      value={form.name}
-                      onChange={handleChange}
-                      required
-                    />
-                  </div>
-                  <div className="form-field">
-                    <input
-                      type="text"
-                      name="phone"
-                      className="form-field__input"
-                      placeholder={t('joinUs.apply.phonePlaceholder')}
-                      value={form.phone}
-                      onChange={handleChange}
-                      required
-                    />
-                  </div>
+                <div className="contact-card__icon">✉</div>
+                <div className="contact-card__info">
+                  <span className="contact-card__label">{t('joinUs.apply.emailLabel')}</span>
+                  <span className="contact-card__value">oceannoir580@gmail.com</span>
                 </div>
-                <div className="form-field">
-                  <select
-                    name="role"
-                    className="form-field__input form-field__select"
-                    value={form.role}
-                    onChange={handleChange}
-                    required
-                  >
-                    <option value="" disabled>{t('joinUs.apply.rolePlaceholder')}</option>
-                    {applyRoles.map((r, i) => (
-                      <option key={i} value={r}>{r}</option>
-                    ))}
-                  </select>
+              </motion.a>
+
+              {/* Phone 1 */}
+              <motion.a
+                href="tel:+61452629580"
+                className="contact-card"
+                {...fadeUp(0.2)}
+              >
+                <div className="contact-card__icon">✆</div>
+                <div className="contact-card__info">
+                  <span className="contact-card__label">{t('joinUs.apply.phoneLabel')}</span>
+                  <span className="contact-card__value">0452 629 580</span>
                 </div>
-                <div className="form-field">
-                  <textarea
-                    name="message"
-                    className="form-field__input form-field__textarea"
-                    placeholder={t('joinUs.apply.messagePlaceholder')}
-                    value={form.message}
-                    onChange={handleChange}
-                    rows={4}
+              </motion.a>
+
+              {/* Phone 2 Japanese */}
+              <motion.a
+                href="tel:+61433132618"
+                className="contact-card"
+                {...fadeUp(0.3)}
+              >
+                <div className="contact-card__icon">✆</div>
+                <div className="contact-card__info">
+                  <span className="contact-card__label">{t('joinUs.apply.phoneJpLabel')}</span>
+                  <span className="contact-card__value">0433 132 618</span>
+                  <span className="contact-card__note">日本語対応</span>
+                </div>
+              </motion.a>
+
+              {/* WhatsApp QR */}
+              <motion.div className="contact-card contact-card--qr" {...fadeUp(0.4)}>
+                <div className="contact-card__icon">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                  </svg>
+                </div>
+                <div className="contact-card__info">
+                  <span className="contact-card__label">WhatsApp</span>
+                  <span className="contact-card__value">Ocean Noir</span>
+                </div>
+                <div className="contact-card__qr-wrap">
+                  <img
+                    src="/whatsapp-qr.png"
+                    alt="WhatsApp QR Code"
+                    className="contact-card__qr"
                   />
+                  <p className="contact-card__qr-hint">{t('joinUs.apply.qrHint')}</p>
                 </div>
-                <div className="text-center">
-                  <button type="submit" className="btn btn-gold joinus__submit">
-                    <span>{t('joinUs.apply.submit')}</span>
-                  </button>
-                </div>
-              </form>
-            )}
+              </motion.div>
+
+            </div>
           </div>
         </section>
 

@@ -198,15 +198,13 @@
       ]
     },
     "apply": {
-      "title": "Ready to Apply?",
-      "subtitle": "Send your details and we'll be in touch within 24 hours",
-      "namePlaceholder": "Your Name",
-      "phonePlaceholder": "Phone / WeChat",
-      "rolePlaceholder": "Position of Interest",
-      "messagePlaceholder": "Tell us a little about yourself (optional)",
-      "submit": "Submit Application",
-      "success": "Thank you! We'll be in touch shortly.",
-      "roles": ["Companion / Therapist", "Reception", "Housekeeping", "Makeup Artist", "Photographer"]
+      "contactLabel": "Get In Touch",
+      "title": "Contact Us",
+      "subtitle": "Reach out via any of the channels below — we respond within 24 hours",
+      "emailLabel": "Email",
+      "phoneLabel": "Phone",
+      "phoneJpLabel": "Phone (Japanese)",
+      "qrHint": "Scan to add on WhatsApp"
     }
   },
   "footer": {

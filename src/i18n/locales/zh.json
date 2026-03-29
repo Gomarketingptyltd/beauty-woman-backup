@@ -198,15 +198,13 @@
       ]
     },
     "apply": {
-      "title": "准备好申请了吗？",
-      "subtitle": "提交您的信息，我们将在24小时内与您联系",
-      "namePlaceholder": "您的姓名",
-      "phonePlaceholder": "电话 / 微信",
-      "rolePlaceholder": "意向职位",
-      "messagePlaceholder": "简单介绍一下您自己（可选）",
-      "submit": "提交申请",
-      "success": "感谢您！我们将尽快与您联系。",
-      "roles": ["伴侣 / 技师", "前台接待", "客房服务", "化妆师", "摄影师"]
+      "contactLabel": "联系我们",
+      "title": "立即联系",
+      "subtitle": "通过以下任何方式联系我们，我们将在24小时内回复",
+      "emailLabel": "电子邮件",
+      "phoneLabel": "电话",
+      "phoneJpLabel": "电话（日语）",
+      "qrHint": "扫码添加 WhatsApp"
     }
   },
   "footer": {
