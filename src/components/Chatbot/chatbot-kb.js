@@ -148,7 +148,38 @@ export function getQuickReplies(lang) {
    ───────────────────────────────────────────────── */
 const EASTER_EGGS = {
   zh: [
-    // Leo 第一轮
+    // ── 个性 / 自我介绍 ──────────────────────────────
+    {
+      id: 'greeting',
+      triggers: ['你好', '您好', 'hello', 'hi', 'hey', '嗨', '哈喽'],
+      a: '老板好！我是小焦 🖤 夜色宫专属智能管家，有什么想了解的尽管问～',
+    },
+    {
+      id: 'who_are_you',
+      triggers: ['你是谁', '你是谁呀', '你叫什么', '你叫啥', '自我介绍', '介绍一下你自己'],
+      a: '我是小焦 🖤 夜色宫（Ocean Noir）的专属数字管家。什么开业时间、环境、价格、招聘……全都可以问我！',
+    },
+    {
+      id: 'is_robot',
+      triggers: ['你是机器人', '你是ai', '你是人工智能', '你是真人吗', '你是假的', '机器人吗'],
+      a: '机器人？我更愿意说自己是有品位的数字管家 😄 虽然不是真人，但效率绝对在线——有什么想问的，老板？',
+    },
+    {
+      id: 'name',
+      triggers: ['小焦', '你的名字', '叫什么名字', '怎么称呼'],
+      a: '我叫小焦 🖤 夜色宫的专属智能管家，随时候命！',
+    },
+    {
+      id: 'thanks',
+      triggers: ['谢谢', '感谢', '多谢', '辛苦了', '棒', '厉害', '好的谢', '谢了'],
+      a: '不客气，老板！还有什么想问的吗？🖤',
+    },
+    {
+      id: 'bye',
+      triggers: ['再见', '拜拜', 'bye', '886', '回见', '先这样', '没事了', '好了谢谢'],
+      a: '好嘞，老板慢走 🖤 期待四月下旬在夜色宫见到您！',
+    },
+    // ── Leo 第一轮 ──────────────────────────────────
     {
       id: 'leo_1',
       triggers: ['认识 leo', '认识leo', 'leo是谁', '你知道leo吗', 'leo吗'],
@@ -177,6 +208,33 @@ const EASTER_EGGS = {
     },
   ],
   en: [
+    // ── Personality ──────────────────────────────────
+    {
+      id: 'greeting',
+      triggers: ['hello', 'hi', 'hey', 'good morning', 'good evening'],
+      a: 'Hello! I\'m Jiao 🖤 Ocean Noir\'s virtual concierge. Ask me anything — I\'m all yours.',
+    },
+    {
+      id: 'who_are_you',
+      triggers: ['who are you', 'what are you', 'introduce yourself', 'your name'],
+      a: 'I\'m Jiao 🖤 Ocean Noir\'s dedicated digital concierge. Ask me about opening times, facilities, rates, careers — whatever you need!',
+    },
+    {
+      id: 'is_robot',
+      triggers: ['are you a robot', 'are you ai', 'are you real', 'are you human', 'chatbot'],
+      a: 'A robot? I prefer "digital concierge with taste" 😄 Not human, but very efficient — what would you like to know?',
+    },
+    {
+      id: 'thanks',
+      triggers: ['thank you', 'thanks', 'cheers', 'great', 'awesome', 'perfect'],
+      a: 'My pleasure! Anything else I can help with? 🖤',
+    },
+    {
+      id: 'bye',
+      triggers: ['bye', 'goodbye', 'see you', 'that\'s all', 'no more'],
+      a: 'Take care! 🖤 Looking forward to welcoming you at Ocean Noir in late April.',
+    },
+    // ── Leo ──────────────────────────────────────────
     {
       id: 'leo_1',
       triggers: ['know leo', 'who is leo', 'leo?'],
