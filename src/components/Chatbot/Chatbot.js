@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-import { getAnswer, getFallback } from './chatbot-kb';
+import { getAnswer, getFallback, checkEasterEgg } from './chatbot-kb';
 import './Chatbot.css';
 
 const BOT_DELAY = 600;
@@ -61,13 +61,14 @@ export default function Chatbot() {
   const [input, setInput] = useState('');
   const [typing, setTyping] = useState(false);
   const [started, setStarted] = useState(false);
+  const [pendingState, setPendingState] = useState(null);
   const bottomRef = useRef(null);
   const inputRef = useRef(null);
 
   const greet = useCallback(() => {
     const g = lang === 'zh'
-      ? '您好！我是 Ocean Noir 的智能助手 🖤 请选择您想了解的内容，或直接输入您的问题。'
-      : 'Hello! I\'m Ocean Noir\'s virtual assistant 🖤 Select a topic below or type your question.';
+      ? '您好，老板！我是 Ocean Noir 的智能助手 🖤 有什么想了解的，直接问我吧～'
+      : 'Hello! I\'m Ocean Noir\'s virtual assistant 🖤 Ask me anything — I\'m at your service.';
     setMsgs([{ type: 'bot', text: g, id: Date.now() }]);
   }, [lang]);
 
@@ -91,7 +92,8 @@ export default function Chatbot() {
     bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [msgs, typing]);
 
-  const pushAnswer = useCallback((result) => {
+  const pushAnswer = useCallback((result, newPending) => {
+    if (newPending !== undefined) setPendingState(newPending);
     if (!result) {
       const fb = getFallback(lang);
       setMsgs(m => [...m, { type: 'bot', text: fb.a, cta: fb.cta, id: Date.now() }]);
@@ -112,9 +114,17 @@ export default function Chatbot() {
     setMsgs(m => [...m, { type: 'user', text, id: Date.now() }]);
     setTyping(true);
     setTimeout(() => {
-      pushAnswer(getAnswer(text, lang));
+      // Easter eggs take priority
+      const { result: eggResult, newPending } = checkEasterEgg(text, lang, pendingState);
+      if (eggResult) {
+        pushAnswer(eggResult, newPending);
+        return;
+      }
+      // Normal FAQ
+      const faqResult = getAnswer(text, lang);
+      pushAnswer(faqResult, pendingState);
     }, BOT_DELAY);
-  }, [lang, pushAnswer]);
+  }, [lang, pendingState, pushAnswer]);
 
   const handleSend = () => {
     const trimmed = input.trim();

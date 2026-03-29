@@ -143,6 +143,95 @@ export function getQuickReplies(lang) {
   return list.map(item => ({ id: item.id, q: item.q }));
 }
 
+/* ─────────────────────────────────────────────────
+   Easter Egg: multi-turn & single-turn special replies
+   ───────────────────────────────────────────────── */
+const EASTER_EGGS = {
+  zh: [
+    // Leo 第一轮
+    {
+      id: 'leo_1',
+      triggers: ['认识 leo', '认识leo', 'leo是谁', '你知道leo吗', 'leo吗'],
+      a: '哈，Leo 很多哦，大哥你说的是哪个 Leo？',
+      setPending: 'leo',
+    },
+    // Leo 第二轮（大连人 or 姓仇）
+    {
+      id: 'leo_2',
+      pendingState: 'leo',
+      triggers: ['大连', '姓仇', '仇', 'dalian'],
+      a: '那当然认识！他是我老板 😄',
+    },
+    // Morgan
+    {
+      id: 'morgan',
+      triggers: ['认识 morgan', '认识morgan', 'morgan是谁', 'morgan吗', 'morgan'],
+      a: '（压低声音）认识是认识……但我可不敢乱说，怕被打！咱们还是聊点别的吧，老板 😅',
+    },
+    // Babylon / 巴比伦
+    {
+      id: 'babylon',
+      triggers: ['babylon', 'babylona', '巴比伦', '和巴比伦', '同一拨', '一伙'],
+      a: '不仅是一拨，还是更强的那一拨 💪 夜色宫是集大成之作，等四月下旬您亲自来看了就知道！',
+      cta: { label: '提前登记 · WhatsApp', url: 'https://wa.me/61452629580' },
+    },
+  ],
+  en: [
+    {
+      id: 'leo_1',
+      triggers: ['know leo', 'who is leo', 'leo?'],
+      a: 'Leo — there are quite a few! Which Leo are you referring to, boss?',
+      setPending: 'leo',
+    },
+    {
+      id: 'leo_2',
+      pendingState: 'leo',
+      triggers: ['dalian', 'chou', 'qiu'],
+      a: 'Oh, that Leo! Of course — he\'s my boss 😄',
+    },
+    {
+      id: 'morgan',
+      triggers: ['know morgan', 'who is morgan', 'morgan?', 'morgan'],
+      a: '(lowering voice) I know him alright… but I daren\'t say too much — I\'d get in trouble! Let\'s change the subject 😅',
+    },
+    {
+      id: 'babylon',
+      triggers: ['babylon', 'babylona', 'same group', 'same crew'],
+      a: 'More than the same crew — we\'re the stronger one 💪 Ocean Noir is the ultimate evolution. Come see for yourself when we open in late April!',
+      cta: { label: 'Pre-register · WhatsApp', url: 'https://wa.me/61452629580' },
+    },
+  ],
+};
+
+/**
+ * Check easter egg matches. Needs `pendingState` from component.
+ * Returns { result, newPending }
+ */
+export function checkEasterEgg(input, lang, pendingState) {
+  const eggs = EASTER_EGGS[lang] || EASTER_EGGS.zh;
+  const text = input.toLowerCase();
+
+  // Try pending-state eggs first (multi-turn, e.g. Leo round 2)
+  if (pendingState) {
+    const pendingMatch = eggs.find(e =>
+      e.pendingState === pendingState &&
+      e.triggers.some(t => text.includes(t))
+    );
+    if (pendingMatch) return { result: pendingMatch, newPending: null };
+  }
+
+  // Try normal easter egg triggers
+  const match = eggs.find(e =>
+    !e.pendingState &&
+    e.triggers.some(t => text.includes(t))
+  );
+  if (match) {
+    return { result: match, newPending: match.setPending || null };
+  }
+
+  return { result: null, newPending: pendingState };
+}
+
 export function getAnswer(input, lang) {
   const list = KB[lang] || KB.en;
   const text = input.toLowerCase();
@@ -155,12 +244,12 @@ export function getAnswer(input, lang) {
 export function getFallback(lang) {
   if (lang === 'zh') {
     return {
-      a: '抱歉，我暂时无法回答这个问题。请通过WhatsApp直接联系我们，我们会尽快为您解答。',
+      a: '这个问题嘛……我还真答不上来，老板 😄 建议直接加我们 WhatsApp，人工客服更靠谱！',
       cta: { label: '联系客服', url: WA_LINK },
     };
   }
   return {
-    a: 'I\'m not sure about that one. Please reach out to us directly via WhatsApp and we\'ll be happy to help.',
+    a: 'Hmm, that one\'s got me stumped! Best to reach out via WhatsApp — our team will sort you out.',
     cta: { label: 'Contact Us', url: WA_LINK },
   };
 }
