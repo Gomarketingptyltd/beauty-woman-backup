@@ -17,7 +17,39 @@
   letter-spacing: 0.03em;
 }
 
-/* ─── Grid ───────────────────────────────────────── */
+/* ─── Coming Soon State ──────────────────────────── */
+.ladies__coming-soon {
+  border: 1px solid rgba(201,168,76,0.2);
+  background: var(--color-charcoal);
+  padding: var(--space-3xl) var(--space-xl);
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-lg);
+}
+
+.ladies__coming-icon {
+  font-size: 2rem;
+  color: var(--color-gold);
+  opacity: 0.5;
+}
+
+.ladies__coming-title {
+  font-family: var(--font-serif);
+  font-size: 1.4rem;
+  font-weight: 400;
+  color: var(--color-gold);
+  letter-spacing: 0.04em;
+}
+
+.ladies__coming-body {
+  font-size: 0.92rem;
+  color: var(--color-text-secondary);
+  line-height: 1.9;
+  max-width: 460px;
+}
 .ladies__grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);

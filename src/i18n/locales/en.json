@@ -122,7 +122,8 @@
   "ladies": {
     "label": "Our Companions",
     "title": "Meet the Ladies",
-    "subtitle": "An ever-changing roster of exquisite companions",
+    "comingSoonTitle": "Recruiting & Training in Progress",
+    "comingSoonBody": "Our elite companions are currently being selected and trained to the highest standard. Check back soon — the finest are worth the wait.",
     "age": "Age",
     "more": "View More"
   },
@@ -215,7 +216,13 @@
   },
   "footer": {
     "tagline": "Sydney's Premier Luxury Sensory Entertainment",
-    "rights": "© 2025 Ocean Noir. All rights reserved.",
+    "contactTitle": "Contact Us",
+    "email": "oceannoir580@gmail.com",
+    "phone1": "0452 629 580",
+    "phone1Label": "General Enquiries",
+    "phone2": "0433 132 618",
+    "phone2Label": "Japanese Line · 日本語対応",
+    "rights": "© 2010 Ocean Noir. All rights reserved.",
     "legal": "Adults only (18+). Fully licensed. Compliant with NSW regulations.",
     "links": {
       "privacy": "Privacy Policy",

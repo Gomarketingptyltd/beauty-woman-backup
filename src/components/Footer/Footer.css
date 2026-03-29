@@ -12,6 +12,54 @@
   justify-content: space-between;
   align-items: flex-start;
   gap: var(--space-xl);
+  flex-wrap: wrap;
+}
+
+/* ─── Contact Block ──────────────────────────────── */
+.footer__contact {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.footer__contact-title {
+  font-family: var(--font-sans);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  margin-bottom: var(--space-xs);
+}
+
+.footer__contact-row {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-sm);
+  text-decoration: none;
+  transition: color var(--transition-base);
+  color: var(--color-text-secondary);
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+.footer__contact-row:hover {
+  color: var(--color-gold);
+}
+
+.footer__contact-icon {
+  color: var(--color-gold);
+  opacity: 0.6;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.footer__contact-row em {
+  display: block;
+  font-style: normal;
+  font-size: 0.7rem;
+  color: var(--color-muted);
+  margin-top: 1px;
 }
 
 .footer__brand {

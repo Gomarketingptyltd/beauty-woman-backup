@@ -122,7 +122,8 @@
   "ladies": {
     "label": "我们的佳丽",
     "title": "认识佳丽",
-    "subtitle": "每日更新的精选伴侣阵容",
+    "comingSoonTitle": "招募培训进行中",
+    "comingSoonBody": "我们正在精心甄选与培训最优质的伴侣阵容，敬请期待——最好的值得等待。",
     "age": "年龄",
     "more": "查看更多"
   },
@@ -215,7 +216,13 @@
   },
   "footer": {
     "tagline": "悉尼顶级奢华感官娱乐",
-    "rights": "© 2025 Ocean Noir. 版权所有。",
+    "contactTitle": "联系我们",
+    "email": "oceannoir580@gmail.com",
+    "phone1": "0452 629 580",
+    "phone1Label": "综合咨询",
+    "phone2": "0433 132 618",
+    "phone2Label": "日语专线 · 日本語対応",
+    "rights": "© 2010 Ocean Noir. 版权所有。",
     "legal": "仅限成年人（18岁以上）。持有全套经营许可证。符合新南威尔士州法规。",
     "links": {
       "privacy": "隐私政策",
