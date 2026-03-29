@@ -8,6 +8,7 @@ import Rate from '../components/Rate/Rate';
 import Girl from '../components/Girl/Girl';
 import About from '../components/About/About';
 import Gallery from '../components/Gallery/Gallery';
+import Legal from '../components/Legal/Legal';
 import Footer from '../components/Footer/Footer';
 
 const HomePage = () => {
@@ -27,6 +28,7 @@ const HomePage = () => {
         <Girl />
         <About />
         <Gallery />
+        <Legal />
       </main>
       <Footer />
     </>

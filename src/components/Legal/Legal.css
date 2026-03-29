@@ -1,0 +1,128 @@
+.legal {
+  background: var(--color-midnight);
+  border-top: 1px solid var(--color-border);
+}
+
+.legal__header {
+  margin-bottom: var(--space-xl);
+}
+
+.legal__label {
+  display: block;
+  margin-bottom: var(--space-sm);
+}
+
+.legal__items {
+  max-width: 860px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+/* ─── Item ───────────────────────────────────────── */
+.legal-item {
+  border-bottom: 1px solid var(--color-border);
+}
+
+.legal-item:first-child {
+  border-top: 1px solid var(--color-border);
+}
+
+.legal-item__header {
+  width: 100%;
+  background: none;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-lg);
+  padding: var(--space-xl) 0;
+  cursor: pointer;
+  text-align: left;
+  transition: color var(--transition-base);
+}
+
+.legal-item__header:hover .legal-item__title {
+  color: var(--color-gold);
+}
+
+.legal-item__title-group {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-lg);
+}
+
+.legal-item__icon {
+  font-size: 1.4rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+  opacity: 0.7;
+}
+
+.legal-item__label {
+  font-size: 0.6rem;
+  margin-bottom: 4px;
+}
+
+.legal-item__title {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  font-weight: 400;
+  color: var(--color-text-primary);
+  letter-spacing: 0.03em;
+  transition: color var(--transition-base);
+}
+
+.legal-item__subtitle {
+  font-size: 0.78rem;
+  color: var(--color-muted);
+  margin-top: 4px;
+  letter-spacing: 0.04em;
+}
+
+.legal-item__chevron {
+  font-size: 1.4rem;
+  color: var(--color-gold);
+  opacity: 0.6;
+  flex-shrink: 0;
+  transition: transform var(--transition-base);
+  display: inline-block;
+}
+
+.legal-item__chevron--open {
+  transform: rotate(90deg);
+}
+
+/* ─── Body ───────────────────────────────────────── */
+.legal-item__body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.55s var(--ease-smooth), opacity 0.4s ease;
+  opacity: 0;
+}
+
+.legal-item__body--open {
+  max-height: 1200px;
+  opacity: 1;
+}
+
+.legal-item__body-inner {
+  padding-bottom: var(--space-xl);
+  padding-left: calc(1.4rem + var(--space-lg));
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.legal-item__para {
+  font-size: 0.88rem;
+  color: var(--color-text-secondary);
+  line-height: 2;
+}
+
+@media (max-width: 768px) {
+  .legal-item__body-inner {
+    padding-left: 0;
+  }
+}

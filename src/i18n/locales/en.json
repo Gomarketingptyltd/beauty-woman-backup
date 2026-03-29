@@ -214,6 +214,26 @@
     "title": "The Space",
     "subtitle": "Purpose-built luxury across 2,400 sqm — every suite a world of its own"
   },
+  "compliance": {
+    "accessibility": {
+      "label": "Inclusivity",
+      "title": "Care & Accessibility Commitment",
+      "subtitle": "Physically or Intellectually Disabled Clients",
+      "body": [
+        "Ocean Noir believes that every individual's pursuit of intimacy, emotional connection, and pleasure deserves respect. We approach our guests with an open heart, and deeply understand that clients with physical or intellectual disabilities share the same desire for sensory fulfilment.",
+        "Our companions are trained to provide attentive, patient, and professional care — ensuring you experience the dignity and pleasure you deserve. For your convenience and privacy, we have thoughtfully designed dedicated spaces on the Ground Floor with every detail in mind. The entire venue is fully wheelchair accessible ♿, committed to providing a warm, seamless, and barrier-free environment for your relaxation."
+      ]
+    },
+    "disclaimer": {
+      "label": "Legal",
+      "title": "Legal Disclaimer",
+      "body": [
+        "Ocean Noir is a fully registered and compliant business entity. Our primary service is the provision of premium space rental and the collection of corresponding venue usage fees.",
+        "Regarding payments, we follow a transparent two-part principle: (a) Payments made to Ocean Noir cover room rental and access to the premium amenities provided within the premises; (b) Fees paid to service providers are based on independent agreements and mutual consent reached between you and them regarding specific services.",
+        "Please be advised that each service provider operating within this venue is an independent self-employed individual. They are neither employees of Ocean Noir nor personnel engaged under any contractual arrangement with the company. No employment relationship of any kind exists between Ocean Noir and its service providers. Ocean Noir does not pay any wages or subsidies to service providers; all income earned by service providers comes directly from payments made by clients. This clear distinction is designed to ensure the independence and professionalism of all services."
+      ]
+    }
+  },
   "footer": {
     "tagline": "Sydney's Premier Luxury Sensory Entertainment",
     "contactTitle": "Contact Us",
