@@ -1,5 +1,3 @@
-import i18n from '../../i18n/index.js';
-
 const WA_LINK = 'https://wa.me/61452629580';
 
 const KB = {
