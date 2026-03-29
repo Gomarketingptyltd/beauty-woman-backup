@@ -4,6 +4,7 @@ import { HelmetProvider } from 'react-helmet-async';
 import './i18n/index.js';
 import './App.css';
 import AgeGate from './components/AgeGate/AgeGate';
+import AnnouncementBar from './components/AnnouncementBar/AnnouncementBar';
 import HomePage from './views/HomePage';
 import JoinUs from './views/JoinUs';
 
@@ -16,6 +17,7 @@ function App() {
       {!ageOk && <AgeGate onEnter={() => setAgeOk(true)} />}
       {ageOk && (
         <div className="App">
+          <AnnouncementBar />
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/en" element={<HomePage />} />

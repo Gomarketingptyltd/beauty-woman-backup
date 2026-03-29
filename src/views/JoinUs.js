@@ -196,6 +196,125 @@ const JoinUs = () => {
             )}
           </div>
         </section>
+
+        {/* ── Japanese Recruitment ────────────────────── */}
+        <section className="joinus__jp section-padding">
+          <div className="container">
+            <div className="jp__header text-center">
+              <p className="jp__lang-tag">日本語 / Japanese</p>
+              <h2 className="jp__headline">
+                【Ocean Noir】<br />
+                シドニー27年の信頼 × 究極のニューオープン
+              </h2>
+              <p className="jp__tagline">
+                「稼げる金額、客層の質、環境の美しさ。<br className="jp__br" />
+                そのすべてが、シドニーNo.1。」
+              </p>
+            </div>
+
+            <div className="jp__intro">
+              <p className="jp__body">
+                シドニーで27年間、常に業界の頂点に君臨し続けてきた
+                <strong>「Babylonグループ」</strong>。
+                その圧倒的な実績と世界中のVVIPネットワークを継承し、
+                満を持して誕生したのが最高級フラッグシップ店
+                <strong>『Ocean Noir』</strong>です。
+              </p>
+            </div>
+
+            <div className="jp__earn-block">
+              <div className="jp__earn-header">
+                <span className="jp__earn-icon">💰</span>
+                <h3 className="jp__earn-title">圧倒的な収益力</h3>
+                <span className="jp__earn-sub">「時給」という概念は、もういりません。</span>
+              </div>
+              <div className="jp__earn-grid">
+                <div className="jp__earn-card">
+                  <span className="jp__earn-label">日収目安</span>
+                  <span className="jp__earn-amount">$2,000 ～ $5,000＋＋</span>
+                </div>
+                <div className="jp__earn-card jp__earn-card--gold">
+                  <span className="jp__earn-label">月収目安</span>
+                  <span className="jp__earn-amount">1,500万円 ～ 5,000万円以上</span>
+                </div>
+              </div>
+              <p className="jp__earn-note">
+                モデル・タレント・AV経験者の方は、特別待遇にて完全バックアップ。<br />
+                新店オープンにつき、現在シドニーで最も集客力があり、稼げるチャンスが広がっています。
+              </p>
+            </div>
+
+            <div className="jp__reasons">
+              <h3 className="jp__reasons-title">
+                <span className="jp__diamond">💎</span>
+                【Ocean Noir】が選ばれる3つの絶対的理由
+              </h3>
+              <div className="jp__reasons-grid">
+                <div className="jp__reason-card">
+                  <div className="jp__reason-num">1</div>
+                  <h4 className="jp__reason-title">27年の実績が約束する「最高峰のVVIP客層」</h4>
+                  <p className="jp__reason-body">
+                    私たちが27年かけて築き上げたのは、紳士的な超富裕層との深い絆です。
+                    新店ながら、BabylonグループのVIP顧客をそのまま引き継いでいるため、
+                    入店初日から最高級の客層を接客することが可能です。
+                  </p>
+                </div>
+                <div className="jp__reason-card">
+                  <div className="jp__reason-num">2</div>
+                  <h4 className="jp__reason-title">ニューオープン：全室スイート仕様の「宮殿空間」</h4>
+                  <p className="jp__reason-body">
+                    数億円を投じた内装は、ヨーロッパの宮殿を彷彿とさせる異空間。
+                    女の子一人ひとりに用意された「完全個室のプライベート・スイート」は、
+                    あなたのプライバシーと尊厳を完璧に守ります。女の子同士の接触も一切ありません。
+                  </p>
+                </div>
+                <div className="jp__reason-card">
+                  <div className="jp__reason-num">3</div>
+                  <h4 className="jp__reason-title">日本人マネージャーによる「24時間フルサポート」</h4>
+                  <p className="jp__reason-body">
+                    シドニーを知り尽くした日本人マネージャーが、お仕事から高級マンションの手配、
+                    VISAの相談まで親身に対応。英語が話せなくても、
+                    日本にいるような安心感でお仕事をスタートできます。
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="jp__welcome">
+              <h3 className="jp__welcome-title">✈️ 日本からの応募、未経験の方も大歓迎！</h3>
+              <div className="jp__welcome-grid">
+                <div className="jp__welcome-item">
+                  <span className="jp__welcome-dot" />
+                  <div>
+                    <strong>新店オープニング特典</strong>
+                    <p>今なら最優先のシフト枠と特別ボーナスをご用意。</p>
+                  </div>
+                </div>
+                <div className="jp__welcome-item">
+                  <span className="jp__welcome-dot" />
+                  <div>
+                    <strong>清潔・安全・高待遇</strong>
+                    <p>衛生管理も徹底。シドニーで最も安全に、最もクリーンに働ける環境です。</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="jp__cta text-center">
+              <p className="jp__cta-quote">
+                「27年の信頼を背負った、新しい伝説がここから始まる。」
+              </p>
+              <p className="jp__cta-body">
+                今の生活を劇的に変えたい。最高の自分に出会いたい。<br />
+                そんなあなたの勇気を、私たちは最高待遇でお待ちしております。
+              </p>
+              <p className="jp__cta-contact">お問い合わせは24時間受付中。まずはLINEで「理想の働き方」を教えてください。</p>
+              <a href="#apply" className="btn btn-gold jp__apply-btn">
+                <span>今すぐ応募する</span>
+              </a>
+            </div>
+          </div>
+        </section>
       </main>
 
       <Footer />

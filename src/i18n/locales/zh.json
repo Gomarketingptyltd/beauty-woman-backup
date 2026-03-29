@@ -1,4 +1,7 @@
 {
+  "announcement": {
+    "text": "4月下旬盛大开业 · Ocean Noir 悉尼旗舰 · 现已接受预约"
+  },
   "nav": {
     "home": "首页",
     "services": "服务",
@@ -38,13 +41,82 @@
   },
   "rates": {
     "label": "消费参考",
-    "title": "收费标准",
-    "subtitle": "透明定价，无隐藏收费",
-    "lady": "佳丽",
-    "room": "套房",
-    "hours": "全周营业 · 周日至周四上午10时至次日凌晨5时 · 周五及周六24小时",
-    "note": "收费包含全套服务。部分佳丽可能根据所需服务收取附加费用。",
-    "book": "立即预约"
+    "title": "套餐价目",
+    "subtitle": "五种沉浸式体验，每一种都是独立的感官世界",
+    "bookingRequired": "需预约",
+    "flagship": "旗舰套餐",
+    "selectDuration": "选择时长",
+    "hours": "4月下旬盛大开业 · 现已接受预约",
+    "note": "所有项目均为私人包厢，价格以澳元计算。",
+    "book": "立即预约",
+    "packages": [
+      {
+        "id": 1,
+        "number": "01",
+        "nameEn": "THE QUICK BLISS",
+        "nameCn": "精致快乐",
+        "description": "快速唤醒 · 梦幻舞台 · 特定主题空间",
+        "bookingRequired": false,
+        "flagship": false,
+        "sessions": [
+          { "duration": "30 分钟", "price": "$200" },
+          { "duration": "45 分钟", "price": "$270" },
+          { "duration": "60 分钟", "price": "$320" }
+        ]
+      },
+      {
+        "id": 2,
+        "number": "02",
+        "nameEn": "STEAM SANCTUARY",
+        "nameCn": "极境湿蒸",
+        "description": "房内独立湿蒸 · 深度排毒 · 私密互动",
+        "bookingRequired": false,
+        "flagship": false,
+        "sessions": [
+          { "duration": "60 分钟", "price": "$428" },
+          { "duration": "90 分钟", "price": "$628" }
+        ]
+      },
+      {
+        "id": 3,
+        "number": "03",
+        "nameEn": "SILK ROAD AQUA",
+        "nameCn": "丝路·水床经典",
+        "description": "湿蒸预热 · 海盐净肤 · 鲜奶滋养 · 水床全身滑推",
+        "bookingRequired": false,
+        "flagship": false,
+        "sessions": [
+          { "duration": "60 分钟", "price": "$458" },
+          { "duration": "90 分钟", "price": "$638" }
+        ]
+      },
+      {
+        "id": 4,
+        "number": "04",
+        "nameEn": "DEEP SPA RITUAL",
+        "nameCn": "浮生浴缸",
+        "description": "超大按摩浴缸 · 泡沫交互 · 浪漫水乳交融",
+        "bookingRequired": true,
+        "flagship": false,
+        "sessions": [
+          { "duration": "60 分钟", "price": "$488" },
+          { "duration": "90 分钟", "price": "$688" }
+        ]
+      },
+      {
+        "id": 5,
+        "number": "05",
+        "nameEn": "BLACK-GOLD SOVEREIGN",
+        "nameCn": "黑金·全能王",
+        "description": "水床互动 · 性爱椅 · 顶级大床 · 人体工学探索",
+        "bookingRequired": false,
+        "flagship": true,
+        "sessions": [
+          { "duration": "60 分钟", "price": "$558" },
+          { "duration": "90 分钟", "price": "$788" }
+        ]
+      }
+    ]
   },
   "ladies": {
     "label": "我们的佳丽",

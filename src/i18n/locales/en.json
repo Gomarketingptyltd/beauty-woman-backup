@@ -1,4 +1,7 @@
 {
+  "announcement": {
+    "text": "Opening Late April 2025 · Grand Opening — Ocean Noir Sydney · Now Accepting Bookings"
+  },
   "nav": {
     "home": "HOME",
     "services": "SERVICES",
@@ -39,12 +42,81 @@
   "rates": {
     "label": "Investment",
     "title": "Rates & Sessions",
-    "subtitle": "Transparent pricing — no surprises",
-    "lady": "Companion",
-    "room": "Suite",
-    "hours": "Open 7 days · Sunday–Thursday 10am–5am · Friday & Saturday 24 Hours",
-    "note": "Rates include full service. Select companions may apply additional fees based on requested services.",
-    "book": "Book Now"
+    "subtitle": "Five curated experiences — each a world of its own",
+    "bookingRequired": "Booking Required",
+    "flagship": "Signature",
+    "selectDuration": "Select Duration",
+    "hours": "Opening Late April · Bookings now accepted",
+    "note": "All sessions are private and fully inclusive. Pricing is in AUD.",
+    "book": "Book Now",
+    "packages": [
+      {
+        "id": 1,
+        "number": "01",
+        "nameEn": "THE QUICK BLISS",
+        "nameCn": "精致快乐",
+        "description": "Rapid awakening · Dream stage · Themed private space",
+        "bookingRequired": false,
+        "flagship": false,
+        "sessions": [
+          { "duration": "30 Mins", "price": "$200" },
+          { "duration": "45 Mins", "price": "$270" },
+          { "duration": "60 Mins", "price": "$320" }
+        ]
+      },
+      {
+        "id": 2,
+        "number": "02",
+        "nameEn": "STEAM SANCTUARY",
+        "nameCn": "极境湿蒸",
+        "description": "Private in-room steam · Deep detox · Intimate interaction",
+        "bookingRequired": false,
+        "flagship": false,
+        "sessions": [
+          { "duration": "60 Mins", "price": "$428" },
+          { "duration": "90 Mins", "price": "$628" }
+        ]
+      },
+      {
+        "id": 3,
+        "number": "03",
+        "nameEn": "SILK ROAD AQUA",
+        "nameCn": "丝路·水床经典",
+        "description": "Steam warm-up · Sea salt cleanse · Milk nourishment · Full-body waterbed glide",
+        "bookingRequired": false,
+        "flagship": false,
+        "sessions": [
+          { "duration": "60 Mins", "price": "$458" },
+          { "duration": "90 Mins", "price": "$638" }
+        ]
+      },
+      {
+        "id": 4,
+        "number": "04",
+        "nameEn": "DEEP SPA RITUAL",
+        "nameCn": "浮生浴缸",
+        "description": "Oversized jacuzzi · Foam immersion · Romantic water fusion",
+        "bookingRequired": true,
+        "flagship": false,
+        "sessions": [
+          { "duration": "60 Mins", "price": "$488" },
+          { "duration": "90 Mins", "price": "$688" }
+        ]
+      },
+      {
+        "id": 5,
+        "number": "05",
+        "nameEn": "BLACK-GOLD SOVEREIGN",
+        "nameCn": "黑金·全能王",
+        "description": "Waterbed · Pleasure chair · King suite · Full ergonomic exploration",
+        "bookingRequired": false,
+        "flagship": true,
+        "sessions": [
+          { "duration": "60 Mins", "price": "$558" },
+          { "duration": "90 Mins", "price": "$788" }
+        ]
+      }
+    ]
   },
   "ladies": {
     "label": "Our Companions",

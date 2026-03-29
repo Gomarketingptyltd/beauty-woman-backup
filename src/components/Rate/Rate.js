@@ -1,24 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import './Rate.css';
-
-const RATES = [
-  { id: 1, duration: '30 min', price: '$150', lady: '$90',  room: '$60'  },
-  { id: 2, duration: '45 min', price: '$200', lady: '$120', room: '$80'  },
-  { id: 3, duration: '1 Hour', price: '$250', lady: '$150', room: '$100' },
-];
 
 const cardVariants = {
   hidden: { opacity: 0, y: 32 },
   visible: (i) => ({
     opacity: 1, y: 0,
-    transition: { duration: 0.7, delay: i * 0.15, ease: [0.4, 0, 0.2, 1] },
+    transition: { duration: 0.7, delay: i * 0.1, ease: [0.4, 0, 0.2, 1] },
   }),
 };
 
 const Rate = () => {
   const { t } = useTranslation();
+  const packages = t('rates.packages', { returnObjects: true });
+  const [selected, setSelected] = useState({});
+
+  const handleSelect = (pkgId, sessionIdx) => {
+    setSelected(prev => ({ ...prev, [pkgId]: sessionIdx }));
+  };
 
   return (
     <section id="rates" className="rate section-padding">
@@ -33,41 +33,67 @@ const Rate = () => {
           <p className="rate__subtitle">{t('rates.subtitle')}</p>
         </div>
 
-        <div className="rate__cards">
-          {RATES.map((r, i) => (
-            <motion.div
-              key={r.id}
-              className={`rate__card ${i === 1 ? 'rate__card--featured' : ''}`}
-              variants={cardVariants}
-              custom={i}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: '-80px' }}
-            >
-              {i === 1 && <span className="rate__badge">Popular</span>}
-              <div className="rate__price-block">
-                <span className="rate__price">{r.price}</span>
-                <span className="rate__duration">{r.duration}</span>
-              </div>
-              <div className="rate__breakdown">
-                <div className="rate__breakdown-row">
-                  <span className="rate__breakdown-label">{t('rates.lady')}</span>
-                  <span className="rate__breakdown-value">{r.lady}</span>
+        <div className="rate__grid">
+          {packages.map((pkg, i) => {
+            const activeIdx = selected[pkg.id] ?? 0;
+            const activeSession = pkg.sessions[activeIdx];
+            return (
+              <motion.div
+                key={pkg.id}
+                className={`rate__card ${pkg.flagship ? 'rate__card--flagship' : ''}`}
+                variants={cardVariants}
+                custom={i}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, margin: '-60px' }}
+              >
+                {pkg.flagship && (
+                  <div className="rate__card-badge">{t('rates.flagship')}</div>
+                )}
+                {pkg.bookingRequired && (
+                  <div className="rate__card-badge rate__card-badge--booking">
+                    {t('rates.bookingRequired')}
+                  </div>
+                )}
+
+                <div className="rate__card-top">
+                  <span className="rate__card-number">{pkg.number}</span>
+                  <div className="rate__card-names">
+                    <span className="rate__card-name-cn">{pkg.nameCn}</span>
+                    <span className="rate__card-name-en">{pkg.nameEn}</span>
+                  </div>
                 </div>
-                <div className="rate__breakdown-divider" />
-                <div className="rate__breakdown-row">
-                  <span className="rate__breakdown-label">{t('rates.room')}</span>
-                  <span className="rate__breakdown-value">{r.room}</span>
+
+                <p className="rate__card-desc">{pkg.description}</p>
+
+                <div className="rate__sessions">
+                  {pkg.sessions.map((session, j) => (
+                    <button
+                      key={j}
+                      className={`rate__session-btn ${activeIdx === j ? 'rate__session-btn--active' : ''}`}
+                      onClick={() => handleSelect(pkg.id, j)}
+                    >
+                      <span className="rate__session-duration">{session.duration}</span>
+                      <span className="rate__session-price">{session.price}</span>
+                    </button>
+                  ))}
                 </div>
-              </div>
-              <button className="btn btn-gold rate__book-btn">
-                <span>{t('rates.book')}</span>
-              </button>
-            </motion.div>
-          ))}
+
+                <div className="rate__card-footer">
+                  <div className="rate__selected-price">
+                    <span className="rate__selected-duration">{activeSession.duration}</span>
+                    <span className="rate__selected-amount">{activeSession.price}</span>
+                  </div>
+                  <button className="btn btn-gold rate__book-btn">
+                    <span>{t('rates.book')}</span>
+                  </button>
+                </div>
+              </motion.div>
+            );
+          })}
         </div>
 
-        <div className="rate__info">
+        <div className="rate__info text-center">
           <p className="rate__hours">{t('rates.hours')}</p>
           <p className="rate__note">{t('rates.note')}</p>
         </div>
