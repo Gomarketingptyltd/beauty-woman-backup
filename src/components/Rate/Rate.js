@@ -84,9 +84,6 @@ const Rate = () => {
                     <span className="rate__selected-duration">{activeSession.duration}</span>
                     <span className="rate__selected-amount">{activeSession.price}</span>
                   </div>
-                  <button className="btn btn-gold rate__book-btn">
-                    <span>{t('rates.book')}</span>
-                  </button>
                 </div>
               </motion.div>
             );

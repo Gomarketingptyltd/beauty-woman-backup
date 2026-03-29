@@ -1,6 +1,6 @@
 {
   "announcement": {
-    "text": "Opening Late April 2025 · Grand Opening — Ocean Noir Sydney · Now Accepting Bookings"
+    "text": "Opening Late April 2025 · Grand Opening — Ocean Noir Sydney · Stay Tuned"
   },
   "nav": {
     "home": "HOME",
@@ -46,9 +46,9 @@
     "bookingRequired": "Booking Required",
     "flagship": "Signature",
     "selectDuration": "Select Duration",
-    "hours": "Opening Late April · Bookings now accepted",
+    "hours": "Open Daily · 10:00 AM – 5:00 AM",
     "note": "All sessions are private and fully inclusive. Pricing is in AUD.",
-    "book": "Book Now",
+    "book": "Enquire Now",
     "packages": [
       {
         "id": 1,

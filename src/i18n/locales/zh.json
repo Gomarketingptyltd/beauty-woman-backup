@@ -1,6 +1,6 @@
 {
   "announcement": {
-    "text": "4月下旬盛大开业 · Ocean Noir 悉尼旗舰 · 现已接受预约"
+    "text": "4月下旬盛大开业 · Ocean Noir 悉尼旗舰 · 敬请期待"
   },
   "nav": {
     "home": "首页",
@@ -46,9 +46,9 @@
     "bookingRequired": "需预约",
     "flagship": "旗舰套餐",
     "selectDuration": "选择时长",
-    "hours": "4月下旬盛大开业 · 现已接受预约",
+    "hours": "每日营业 · 上午10时 – 次日凌晨5时",
     "note": "所有项目均为私人包厢，价格以澳元计算。",
-    "book": "立即预约",
+    "book": "立即咨询",
     "packages": [
       {
         "id": 1,
