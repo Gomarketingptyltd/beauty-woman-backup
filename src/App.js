@@ -5,6 +5,7 @@ import './i18n/index.js';
 import './App.css';
 import AgeGate from './components/AgeGate/AgeGate';
 import AnnouncementBar from './components/AnnouncementBar/AnnouncementBar';
+import Chatbot from './components/Chatbot/Chatbot';
 import HomePage from './views/HomePage';
 import JoinUs from './views/JoinUs';
 
@@ -28,6 +29,7 @@ function App() {
             <Route path="/join-us" element={<JoinUs />} />
             <Route path="/en/join-us" element={<JoinUs />} />
           </Routes>
+          <Chatbot />
         </div>
       )}
     </HelmetProvider>
