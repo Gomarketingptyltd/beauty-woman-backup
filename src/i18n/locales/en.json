@@ -234,6 +234,74 @@
       ]
     }
   },
+  "legal_docs": {
+    "privacy": {
+      "title": "Privacy Policy",
+      "sections": [
+        {
+          "heading": "1. Age Restriction",
+          "body": "This website is intended for adults aged 18 years and over. By accessing this website, you confirm that you are of legal age in your jurisdiction. Ocean Noir reserves the right to refuse entry to any person who cannot verify their age."
+        },
+        {
+          "heading": "2. Information We Collect",
+          "body": "We may collect personal information (such as name and contact details) only when voluntarily provided by you for the purpose of enquiries or pre-registration. We also collect standard website access logs (IP address, browser type, pages visited) for security and analytics purposes."
+        },
+        {
+          "heading": "3. Confidentiality & No Records",
+          "body": "We guarantee complete confidentiality. Ocean Noir does not retain records of client visits, preferences, or transactions. Your privacy is our highest priority."
+        },
+        {
+          "heading": "4. Discreet Billing",
+          "body": "All card transactions are processed with discreet billing descriptions. The venue name or nature of business will not appear on your bank or credit card statement."
+        },
+        {
+          "heading": "5. No Third-Party Disclosure",
+          "body": "We will never sell, rent, or disclose your personal information to third parties, except where required by law."
+        },
+        {
+          "heading": "6. Cookies",
+          "body": "This website uses cookies to improve your browsing experience. By continuing to use the site, you consent to our use of cookies. You may disable cookies through your browser settings, though this may affect site functionality."
+        },
+        {
+          "heading": "7. Contact",
+          "body": "For any privacy-related enquiries, please contact us at oceannoir580@gmail.com."
+        }
+      ]
+    },
+    "terms": {
+      "title": "Terms of Service",
+      "sections": [
+        {
+          "heading": "1. Age Verification",
+          "body": "You must be 18 years of age or older to access this website or enter our premises. By using this website, you confirm you meet this requirement. We reserve the right to request valid photo identification (passport or Australian driver's licence) upon entry."
+        },
+        {
+          "heading": "2. Conditions of Use",
+          "body": "By accessing this website, you agree to use it only for lawful purposes. You must not use this site to harass, defame, or offend others; transmit unlawful or offensive material; use automated scraping tools; or engage in any activity that violates applicable laws or regulations."
+        },
+        {
+          "heading": "3. Independent Service Providers",
+          "body": "All companions operating within Ocean Noir are independent self-employed individuals. They are not employees of Ocean Noir. Ocean Noir provides premium space rental and venue amenities only. Any service arrangements are made independently between guests and companions."
+        },
+        {
+          "heading": "4. Two-Part Fee Structure",
+          "body": "(a) Fees paid to Ocean Noir cover suite rental and access to all venue amenities. (b) Fees paid to companions are independently negotiated between the guest and the companion. Ocean Noir does not direct, control, or receive any portion of companion earnings."
+        },
+        {
+          "heading": "5. Copyright",
+          "body": "All content on this website — including images, text, and design — is the property of Ocean Noir and is protected by copyright law. Reproduction or distribution without prior written consent is prohibited."
+        },
+        {
+          "heading": "6. Limitation of Liability",
+          "body": "Ocean Noir makes no warranties regarding the accuracy or completeness of information on this website. To the extent permitted by law, Ocean Noir is not liable for any indirect, incidental, or consequential loss arising from your use of this website or our premises."
+        },
+        {
+          "heading": "7. Governing Law",
+          "body": "These terms are governed by the laws of New South Wales, Australia. Any disputes shall be subject to the exclusive jurisdiction of the courts of NSW."
+        }
+      ]
+    }
+  },
   "footer": {
     "tagline": "Sydney's Premier Luxury Sensory Entertainment",
     "contactTitle": "Contact Us",
