@@ -160,6 +160,22 @@ const JoinUs = () => {
                 </div>
               </motion.a>
 
+              {/* LINE */}
+              <motion.a
+                href="https://line.me/ti/p/@347chmhh"
+                target="_blank"
+                rel="noreferrer"
+                className="contact-card"
+                {...fadeUp(0.35)}
+              >
+                <div className="contact-card__icon" style={{ fontSize: '1.1rem', fontWeight: 700, color: '#06C755' }}>LINE</div>
+                <div className="contact-card__info">
+                  <span className="contact-card__label">LINE · 日本語対応</span>
+                  <span className="contact-card__value">@347chmhh</span>
+                  <span className="contact-card__note">日本からも繋がれます</span>
+                </div>
+              </motion.a>
+
               {/* WhatsApp QR */}
               <motion.div className="contact-card contact-card--qr" {...fadeUp(0.4)}>
                 <div className="contact-card__icon">
@@ -296,7 +312,7 @@ const JoinUs = () => {
                 今の生活を劇的に変えたい。最高の自分に出会いたい。<br />
                 そんなあなたの勇気を、私たちは最高待遇でお待ちしております。
               </p>
-              <p className="jp__cta-contact">お問い合わせは24時間受付中。まずはLINEで「理想の働き方」を教えてください。</p>
+              <p className="jp__cta-contact">お問い合わせは24時間受付中。LINEまたはWhatsAppで「理想の働き方」を教えてください。<br /><strong style={{color:'var(--color-gold)'}}>LINE ID: @347chmhh</strong></p>
               <a href="#apply" className="btn btn-gold jp__apply-btn">
                 <span>今すぐ応募する</span>
               </a>

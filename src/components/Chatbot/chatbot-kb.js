@@ -49,9 +49,9 @@ const KB = {
     },
     {
       id: 'booking',
-      triggers: ['book', 'booking', 'reserve', 'appointment', 'schedule', 'contact', 'whatsapp'],
+      triggers: ['book', 'booking', 'reserve', 'appointment', 'schedule', 'contact', 'whatsapp', 'line'],
       q: 'How do I make a booking?',
-      a: 'Bookings will open when we launch in late April. In the meantime, you are welcome to register your interest via WhatsApp — we will hold a priority spot and notify you as soon as bookings open.',
+      a: 'Bookings will open when we launch in late April. In the meantime, register your interest via WhatsApp or LINE (@347chmhh) — we will hold a priority spot and notify you as soon as bookings open.',
       cta: { label: 'Pre-register via WhatsApp', url: WA_LINK },
     },
     {
@@ -117,9 +117,9 @@ const KB = {
     },
     {
       id: 'booking',
-      triggers: ['预约', '预订', '怎么约', '联系', '订位', 'whatsapp', '微信'],
+      triggers: ['预约', '预订', '怎么约', '联系', '订位', 'whatsapp', '微信', 'line'],
       q: '怎么预约？',
-      a: '开业后将正式开放预约。目前可通过WhatsApp提前登记兴趣，我们会为您保留优先位置，并在预约开放第一时间通知您。',
+      a: '开业后将正式开放预约。目前可通过WhatsApp或LINE（@347chmhh）提前登记，我们会为您保留优先位置，并在预约开放第一时间通知您。',
       cta: { label: '通过WhatsApp提前登记', url: WA_LINK },
     },
     {

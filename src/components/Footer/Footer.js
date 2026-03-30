@@ -28,6 +28,13 @@ const Footer = () => {
                 <span className="footer__contact-icon">✉</span>
                 <span>{t('footer.email')}</span>
               </a>
+              <a href="https://line.me/ti/p/@347chmhh" target="_blank" rel="noreferrer" className="footer__contact-row">
+                <span className="footer__contact-icon">💬</span>
+                <span>
+                  {t('footer.line')}
+                  <em>{t('footer.lineLabel')}</em>
+                </span>
+              </a>
               <a href="tel:+61452629580" className="footer__contact-row">
                 <span className="footer__contact-icon">✆</span>
                 <span>
