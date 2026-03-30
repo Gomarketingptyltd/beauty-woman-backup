@@ -162,12 +162,12 @@ const EASTER_EGGS = {
     {
       id: 'greeting',
       triggers: ['你好', '您好', 'hello', 'hi', 'hey', '嗨', '哈喽'],
-      a: '老板好！我是小焦 🖤 夜色宫专属智能管家，有什么想了解的尽管问～',
+      a: '老板好！我是小乔 🖤 夜色宫专属智能管家，有什么想了解的尽管问～',
     },
     {
       id: 'who_are_you',
       triggers: ['你是谁', '你是谁呀', '你叫什么', '你叫啥', '自我介绍', '介绍一下你自己'],
-      a: '我是小焦 🖤 夜色宫（Ocean Noir）的专属数字管家。什么开业时间、环境、价格、招聘……全都可以问我！',
+      a: '我是小乔 🖤 夜色宫（Ocean Noir）的专属数字管家。什么开业时间、环境、价格、招聘……全都可以问我！',
     },
     {
       id: 'is_robot',
@@ -176,8 +176,8 @@ const EASTER_EGGS = {
     },
     {
       id: 'name',
-      triggers: ['小焦', '你的名字', '叫什么名字', '怎么称呼'],
-      a: '我叫小焦 🖤 夜色宫的专属智能管家，随时候命！',
+      triggers: ['小乔', '你的名字', '叫什么名字', '怎么称呼'],
+      a: '我叫小乔 🖤 夜色宫的专属智能管家，随时候命！',
     },
     {
       id: 'thanks',
@@ -222,12 +222,12 @@ const EASTER_EGGS = {
     {
       id: 'greeting',
       triggers: ['hello', 'hi', 'hey', 'good morning', 'good evening'],
-      a: 'Hello! I\'m Jiao 🖤 Ocean Noir\'s virtual concierge. Ask me anything — I\'m all yours.',
+      a: 'Hello! I\'m Qiao 🖤 Ocean Noir\'s virtual concierge. Ask me anything — I\'m all yours.',
     },
     {
       id: 'who_are_you',
       triggers: ['who are you', 'what are you', 'introduce yourself', 'your name'],
-      a: 'I\'m Jiao 🖤 Ocean Noir\'s dedicated digital concierge. Ask me about opening times, facilities, rates, careers — whatever you need!',
+      a: 'I\'m Qiao 🖤 Ocean Noir\'s dedicated digital concierge. Ask me about opening times, facilities, rates, careers — whatever you need!',
     },
     {
       id: 'is_robot',
