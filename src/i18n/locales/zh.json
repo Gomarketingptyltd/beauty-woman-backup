@@ -33,10 +33,10 @@
     "subtitle": "每一个细节都为您的舒适与私密而精心策划",
     "items": {
       "discreet": { "title": "私密选址", "desc": "安全私密入口，全程保密" },
-      "parking": { "title": "免费停车", "desc": "宽敞安全的私人停车场" },
+      "parking": { "title": "便捷停车", "desc": "门口有路边停车位，附近停车位充裕，旁边 Market City 商场亦有大量停车场" },
       "ladies": { "title": "精英伴侣", "desc": "悉尼最优质的甄选" },
       "satisfaction": { "title": "五星体验", "desc": "每次到访均享顶级服务保障" },
-      "atm": { "title": "EFTPOS与ATM", "desc": "便捷支持所有支付方式" },
+      "atm": { "title": "EFTPOS · 刷卡支付", "desc": "接受 Visa 及 Mastercard · 刷卡附加2%手续费 · 提供EFTPOS · 账单隐私描述，消费全程保密" },
       "climate": { "title": "恒温空调", "desc": "豪华装潢，全年恒温套房" }
     }
   },

@@ -33,10 +33,10 @@
     "subtitle": "Every detail curated for your comfort and discretion",
     "items": {
       "discreet": { "title": "Discreet Location", "desc": "Secure, private entry with complete confidentiality" },
-      "parking": { "title": "Free Parking", "desc": "Ample, secure private parking available" },
+      "parking": { "title": "Convenient Parking", "desc": "Street parking at the door · Ample spaces nearby · Market City car park just minutes away" },
       "ladies": { "title": "Elite Companions", "desc": "The finest selection Sydney has to offer" },
       "satisfaction": { "title": "Five-Star Experience", "desc": "Premium service guaranteed, every visit" },
-      "atm": { "title": "EFTPOS & ATM", "desc": "All payment methods conveniently accepted" },
+      "atm": { "title": "EFTPOS & Card Payment", "desc": "Visa & Mastercard accepted · 2% surcharge on card payments · EFTPOS available · Discreet billing descriptions" },
       "climate": { "title": "Climate Controlled", "desc": "Luxuriously appointed, temperature-perfect suites" }
     }
   },
