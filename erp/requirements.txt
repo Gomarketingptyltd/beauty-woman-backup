@@ -1,0 +1,6 @@
+# Ocean Noir VMS — core app (see VERSION / CHANGELOG.md)
+streamlit>=1.55.0
+pandas>=2.2.0
+Pillow>=10.3.0
+# Stronger password hashes than PBKDF2 fallback (recommended for production)
+bcrypt>=4.1.0

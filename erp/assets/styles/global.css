@@ -1,0 +1,508 @@
+/* ═══════════════════════════════════════════════════════════
+   Ocean Noir VMS — Global Stylesheet
+   夜色宫管理系统 · 全局样式
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── Design Tokens ──────────────────────────────────────── */
+:root {
+    --onl-bg:            #141414;
+    --onl-bg-2:          #1e1e1e;
+    --onl-bg-3:          #252525;
+    --onl-surface:       rgba(255,255,255,0.04);
+    --onl-border:        rgba(255,255,255,0.08);
+    --onl-border-hover:  rgba(212,88,108,0.35);
+
+    --onl-primary:       #d4586c;
+    --onl-primary-dark:  #b8455a;
+    --onl-primary-glow:  rgba(212,88,108,0.20);
+    --onl-gold:          #c9a84c;
+
+    --onl-text:          #eaeaea;
+    --onl-text-2:        #a0a0a0;
+    --onl-text-3:        #666666;
+
+    --onl-green:         #22c55e;
+    --onl-yellow:        #f59e0b;
+    --onl-red:           #ef4444;
+    --onl-blue:          #3b82f6;
+
+    --onl-radius:        8px;
+    --onl-radius-lg:     14px;
+    --onl-shadow:        0 4px 24px rgba(0,0,0,0.5);
+    --onl-shadow-glow:   0 0 32px rgba(212,88,108,0.12);
+}
+
+/* ── Base App ────────────────────────────────────────────── */
+.stApp {
+    background-color: var(--onl-bg) !important;
+    color: var(--onl-text) !important;
+}
+
+[data-testid="stAppViewContainer"],
+[data-testid="stMain"],
+section.main {
+    background-color: var(--onl-bg) !important;
+}
+
+/* ── Sidebar ─────────────────────────────────────────────── */
+[data-testid="stSidebar"] {
+    background-color: var(--onl-bg-2) !important;
+    border-right: 1px solid var(--onl-border) !important;
+}
+
+[data-testid="stSidebar"] .stMarkdown,
+[data-testid="stSidebar"] label,
+[data-testid="stSidebar"] p {
+    color: var(--onl-text-2) !important;
+}
+
+/* ── Page Title & Subtitle ───────────────────────────────── */
+.on-page-title {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--onl-text);
+    margin-bottom: 0.2rem;
+    letter-spacing: 0.02em;
+}
+
+.on-page-sub {
+    font-size: 0.88rem;
+    color: var(--onl-text-2);
+    margin-bottom: 1.2rem;
+}
+
+.on-divider {
+    border: none;
+    border-top: 1px solid var(--onl-border);
+    margin: 0.8rem 0 1.4rem;
+}
+
+/* ── Cards ───────────────────────────────────────────────── */
+.on-card {
+    background: var(--onl-surface);
+    border: 1px solid var(--onl-border);
+    border-radius: var(--onl-radius);
+    padding: 1.2rem;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.on-card:hover {
+    border-color: var(--onl-border-hover);
+    box-shadow: var(--onl-shadow-glow);
+}
+
+.on-card-accent {
+    border-color: rgba(212,88,108,0.2);
+    background: linear-gradient(135deg, rgba(212,88,108,0.06) 0%, var(--onl-surface) 100%);
+}
+
+/* ── Buttons ─────────────────────────────────────────────── */
+.stButton > button {
+    border-radius: var(--onl-radius) !important;
+    transition: all 0.2s ease !important;
+}
+
+.stButton > button[kind="primary"],
+.stButton > button[data-testid="baseButton-primary"] {
+    background: var(--onl-primary) !important;
+    border: none !important;
+    color: #fafafa !important;
+    font-weight: 600 !important;
+    box-shadow: 0 4px 14px rgba(212,88,108,0.3) !important;
+}
+
+.stButton > button[kind="primary"]:hover {
+    background: var(--onl-primary-dark) !important;
+    box-shadow: 0 6px 20px rgba(212,88,108,0.4) !important;
+    transform: translateY(-1px) !important;
+}
+
+.stButton > button[kind="secondary"],
+.stButton > button[data-testid="baseButton-secondary"] {
+    background: transparent !important;
+    border: 1px solid var(--onl-border) !important;
+    color: var(--onl-text) !important;
+}
+
+.stButton > button[kind="secondary"]:hover {
+    border-color: var(--onl-primary) !important;
+    color: var(--onl-primary) !important;
+}
+
+/* ── Inputs ──────────────────────────────────────────────── */
+.stTextInput > div > div > input,
+.stNumberInput > div > div > input,
+.stTextArea > div > div > textarea,
+.stSelectbox > div > div {
+    background: var(--onl-bg-3) !important;
+    border: 1px solid var(--onl-border) !important;
+    border-radius: var(--onl-radius) !important;
+    color: var(--onl-text) !important;
+}
+
+.stTextInput > div > div > input:focus,
+.stNumberInput > div > div > input:focus,
+.stTextArea > div > div > textarea:focus {
+    border-color: rgba(212,88,108,0.5) !important;
+    box-shadow: 0 0 0 2px rgba(212,88,108,0.12) !important;
+}
+
+/* ── Metrics ─────────────────────────────────────────────── */
+[data-testid="stMetric"] {
+    background: var(--onl-surface);
+    border: 1px solid var(--onl-border);
+    border-radius: var(--onl-radius);
+    padding: 1rem 1.2rem;
+}
+
+[data-testid="stMetricValue"] {
+    color: var(--onl-primary) !important;
+    font-weight: 700 !important;
+    font-size: 1.8rem !important;
+}
+
+[data-testid="stMetricLabel"] {
+    color: var(--onl-text-2) !important;
+    font-size: 0.78rem !important;
+    letter-spacing: 0.06em !important;
+    text-transform: uppercase !important;
+}
+
+/* ── Tabs ────────────────────────────────────────────────── */
+.stTabs [data-baseweb="tab-list"] {
+    background: transparent !important;
+    border-bottom: 1px solid var(--onl-border) !important;
+    gap: 0 !important;
+}
+
+.stTabs [data-baseweb="tab"] {
+    background: transparent !important;
+    color: var(--onl-text-2) !important;
+    border-bottom: 2px solid transparent !important;
+    padding: 0.6rem 1.2rem !important;
+    font-size: 0.85rem !important;
+    font-weight: 500 !important;
+}
+
+.stTabs [aria-selected="true"] {
+    color: var(--onl-primary) !important;
+    border-bottom-color: var(--onl-primary) !important;
+    background: transparent !important;
+}
+
+/* ── DataFrames / Tables ─────────────────────────────────── */
+[data-testid="stDataFrame"],
+.stDataFrame {
+    border: 1px solid var(--onl-border) !important;
+    border-radius: var(--onl-radius) !important;
+    overflow: hidden !important;
+}
+
+/* ── Alerts ──────────────────────────────────────────────── */
+[data-testid="stAlert"] {
+    border-radius: var(--onl-radius) !important;
+    border-left-width: 3px !important;
+}
+
+/* ── Scrollbar ───────────────────────────────────────────── */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: var(--onl-bg); }
+::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--onl-primary); }
+
+/* ── Room Status Badges ──────────────────────────────────── */
+.onl-room-free     { color: var(--onl-green)  !important; }
+.onl-room-occupied { color: var(--onl-red)    !important; }
+.onl-room-cleaning { color: var(--onl-yellow) !important; }
+.onl-room-maint    { color: var(--onl-blue)   !important; }
+
+/* ── Tech Status Badges ──────────────────────────────────── */
+.onl-tech-available { color: var(--onl-green)  !important; }
+.onl-tech-busy      { color: var(--onl-red)    !important; }
+.onl-tech-paused    { color: var(--onl-yellow) !important; }
+.onl-tech-offline   { color: var(--onl-text-3) !important; }
+
+/* ── Glass Panel (login page) ────────────────────────────── */
+.onl-v0-glass {
+    background: rgba(255,255,255,0.04) !important;
+    border: 1px solid rgba(255,255,255,0.08) !important;
+    border-radius: var(--onl-radius-lg) !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+}
+
+/* ── Left column branding (login page) ───────────────────── */
+.onl-left {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.onl-v0-row {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-end;
+}
+
+.onl-v0-brand {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.onl-v0-logo-wrap {
+    position: relative;
+    width: 72px;
+    height: 72px;
+    margin-bottom: 0.8rem;
+}
+
+.onl-v0-logo-frame {
+    width: 72px;
+    height: 72px;
+    border-radius: 18px;
+    overflow: hidden;
+    border: 1px solid rgba(212,88,108,0.25);
+}
+
+.onl-v0-logo-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.onl-v0-logo-fallback {
+    width: 72px;
+    height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    background: rgba(212,88,108,0.12);
+    border-radius: 18px;
+}
+
+.onl-v0-logo-glow {
+    position: absolute;
+    inset: -8px;
+    background: radial-gradient(circle, rgba(212,88,108,0.2) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: -1;
+}
+
+.onl-v0-brand-zh {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--onl-text);
+    letter-spacing: 0.03em;
+    margin: 0;
+}
+
+.onl-v0-brand-en {
+    font-size: 0.85rem;
+    color: #e8a0ad;
+    letter-spacing: 0.1em;
+    font-weight: 500;
+}
+
+.onl-v0-brand-sub {
+    font-size: 0.75rem;
+    color: var(--onl-text-3);
+    letter-spacing: 0.04em;
+}
+
+.onl-v0-quick {
+    display: block;
+    text-decoration: none;
+    margin-top: 1.2rem;
+}
+
+.onl-v0-quick-inner {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    background: rgba(212,88,108,0.08);
+    border: 1px solid rgba(212,88,108,0.2);
+    border-radius: var(--onl-radius);
+    transition: border-color 0.2s, background 0.2s;
+}
+
+.onl-v0-quick-inner:hover {
+    border-color: rgba(212,88,108,0.45);
+    background: rgba(212,88,108,0.14);
+}
+
+.onl-v0-quick-icon {
+    color: var(--onl-primary);
+    flex-shrink: 0;
+}
+
+.onl-v0-quick-title {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--onl-text);
+    margin: 0;
+}
+
+.onl-v0-quick-sub {
+    font-size: 0.7rem;
+    color: var(--onl-text-2);
+    margin: 0;
+}
+
+/* Stats panel */
+.onl-v0-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    min-width: 240px;
+}
+
+.onl-v0-stat-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+}
+
+.onl-v0-stat-card {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.onl-v0-stat-head {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.onl-v0-icon-box {
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--onl-primary);
+}
+
+.onl-v0-lucide {
+    width: 16px;
+    height: 16px;
+}
+
+.onl-v0-stat-label {
+    font-size: 0.68rem;
+    color: var(--onl-text-2);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.onl-v0-stat-num {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--onl-text);
+    line-height: 1;
+}
+
+.onl-v0-chart-card {
+    padding: 1rem;
+}
+
+.onl-v0-chart-title {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--onl-text);
+    margin: 0 0 0.15rem;
+}
+
+.onl-v0-chart-hint {
+    font-size: 0.65rem;
+    color: var(--onl-text-3);
+    margin: 0 0 0.6rem;
+}
+
+.onl-v0-chart-y {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100px;
+    position: absolute;
+    left: 0;
+    font-size: 0.6rem;
+    color: var(--onl-text-3);
+}
+
+.onl-v0-chart-plot {
+    position: relative;
+    margin-left: 1.6rem;
+}
+
+.onl-v0-chart-grid {
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+        to bottom,
+        transparent,
+        transparent calc(50% - 1px),
+        rgba(255,255,255,0.04) calc(50% - 1px),
+        rgba(255,255,255,0.04) 50%
+    );
+}
+
+.onl-v0-bars {
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: flex-end;
+    gap: 3px;
+}
+
+.onl-v0-bar-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    flex: 1;
+}
+
+.onl-v0-bar {
+    width: 100%;
+    background: linear-gradient(to top, var(--onl-primary), rgba(212,88,108,0.4));
+    border-radius: 2px 2px 0 0;
+    transition: height 0.4s ease;
+}
+
+.onl-v0-bar-tick {
+    font-size: 0.55rem;
+    color: var(--onl-text-3);
+}
+
+/* Vertical divider */
+.onl-v-divider {
+    width: 1px;
+    min-height: 100%;
+    background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.06), transparent);
+    margin: 0 auto;
+}
+
+/* Login head */
+.onl-v0-login-head {
+    margin-bottom: 1.5rem;
+}
+
+.onl-v0-login-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--onl-text);
+    margin: 0 0 0.3rem;
+}
+
+.onl-v0-login-sub {
+    font-size: 0.8rem;
+    color: var(--onl-text-2);
+}
