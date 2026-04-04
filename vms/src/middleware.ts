@@ -8,8 +8,13 @@ export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   // Public paths — no auth required
-  const publicPaths = ["/display", "/login", "/api/display"];
+  const publicPaths = ["/display", "/login", "/api/display", "/api/auth"];
   if (publicPaths.some((p) => pathname.startsWith(p))) {
+    return NextResponse.next();
+  }
+
+  // All other API routes pass through (auth handled at route level)
+  if (pathname.startsWith("/api/")) {
     return NextResponse.next();
   }
 
