@@ -29,6 +29,7 @@ export function OceanNoirLogo({
         width={s.icon}
         height={s.icon}
         viewBox="0 0 100 100"
+        preserveAspectRatio="xMidYMid meet"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >

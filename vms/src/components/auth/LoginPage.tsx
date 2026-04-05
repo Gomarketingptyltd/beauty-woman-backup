@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -27,7 +27,6 @@ const schema = z.object({
 
 type FormData = z.infer<typeof schema>;
 
-// Mock traffic data for display — will be real data from API
 const MOCK_TRAFFIC = [
   { day: "Mon", orders: 18, revenue: 82 },
   { day: "Tue", orders: 22, revenue: 96 },
@@ -43,6 +42,24 @@ export function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
 
+  // Live technician counts from /api/display/technicians (public, no auth)
+  const [totalTechs, setTotalTechs] = useState<number | null>(null);
+  const [availableTechs, setAvailableTechs] = useState<number | null>(null);
+
+  useEffect(() => {
+    // /api/display/technicians returns all is_active techs regardless of status
+    // We fetch the full list (all statuses) for total, filter for available
+    fetch("/api/display/technicians?all=true")
+      .then((r) => r.ok ? r.json() : null)
+      .then((data) => {
+        if (Array.isArray(data)) {
+          setTotalTechs(data.length);
+          setAvailableTechs(data.filter((t: { status: string }) => t.status === "available").length);
+        }
+      })
+      .catch(() => {});
+  }, []);
+
   const {
     register,
     handleSubmit,
@@ -54,7 +71,6 @@ export function LoginPage() {
     try {
       const supabase = createClient();
 
-      // Look up email from username
       const res = await fetch("/api/auth/username-to-email", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -78,7 +94,6 @@ export function LoginPage() {
         return;
       }
 
-      // Get role and redirect
       const { data: profile } = await supabase
         .from("profiles")
         .select("role, is_active")
@@ -103,94 +118,101 @@ export function LoginPage() {
       {/* Left Panel — Brand + KPI */}
       <div className="hidden lg:flex lg:w-[55%] flex-col relative overflow-hidden bg-noir-950 border-r border-brand-red/20">
         {/* Ambient glow */}
-        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-brand-red/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 right-1/4 w-48 h-48 bg-brand-red/3 rounded-full blur-3xl" />
+        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-brand-red/5 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute bottom-1/4 right-1/4 w-48 h-48 bg-brand-red/3 rounded-full blur-3xl pointer-events-none" />
 
-        <div className="relative flex-1 flex flex-col p-10">
-          {/* Logo */}
-          <OceanNoirLogo size="lg" />
-
-          {/* KPI Cards */}
-          <div className="mt-10 grid grid-cols-2 gap-4">
-            <KpiCard
-              label="技师总数"
-              labelEn="Total Technicians"
-              value="20"
-              color="silver"
-            />
-            <KpiCard
-              label="今日可接待"
-              labelEn="Available Now"
-              value="—"
-              color="green"
-            />
-            <KpiCard
-              label="本月订单"
-              labelEn="Monthly Orders"
-              value="—"
-              color="red"
-            />
-            <KpiCard
-              label="本月营业额"
-              labelEn="Monthly Revenue"
-              value="—"
-              color="silver"
-            />
-          </div>
-
-          {/* Traffic chart */}
-          <div className="mt-8 brand-card p-4 flex-1">
-            <div className="mb-3">
-              <p className="text-brand-silver text-sm font-medium">近期每日客流量</p>
-              <p className="text-brand-silver-dim/50 text-xs">
-                Daily Traffic — Past 7 Days
-              </p>
+        {/* ── vertically center content to match the login form on the right ── */}
+        <div className="relative flex-1 flex flex-col items-center justify-center px-10 py-12">
+          <div className="w-full max-w-sm">
+            {/* Logo */}
+            <div className="flex justify-center mb-10">
+              <OceanNoirLogo size="lg" />
             </div>
-            <div className="h-32">
-              <ResponsiveContainer width="100%" height="100%">
-                <BarChart data={MOCK_TRAFFIC} barSize={16}>
-                  <XAxis
-                    dataKey="day"
-                    tick={{ fill: "#8A8A96", fontSize: 10 }}
-                    axisLine={false}
-                    tickLine={false}
-                  />
-                  <YAxis
-                    tick={{ fill: "#8A8A96", fontSize: 10 }}
-                    axisLine={false}
-                    tickLine={false}
-                    width={25}
-                  />
-                  <Tooltip
-                    contentStyle={{
-                      background: "#120E10",
-                      border: "1px solid rgba(200,24,42,0.3)",
-                      borderRadius: 8,
-                      color: "#F0EEE9",
-                      fontSize: 12,
-                    }}
-                    cursor={{ fill: "rgba(200,24,42,0.1)" }}
-                  />
-                  <Bar
-                    dataKey="orders"
-                    fill="#C8182A"
-                    radius={[3, 3, 0, 0]}
-                    name="订单数"
-                  />
-                </BarChart>
-              </ResponsiveContainer>
-            </div>
-          </div>
 
-          {/* Display screen link */}
-          <a
-            href="/display"
-            target="_blank"
-            className="mt-4 flex items-center gap-2 text-brand-silver-dim/50 hover:text-brand-silver-dim text-sm transition-colors group"
-          >
-            <Monitor className="h-4 w-4 group-hover:text-brand-red transition-colors" />
-            <span>技师展示屏 — 无需登录</span>
-          </a>
+            {/* KPI Cards */}
+            <div className="grid grid-cols-2 gap-4">
+              <KpiCard
+                label="技师总数"
+                labelEn="Total Technicians"
+                value={totalTechs !== null ? String(totalTechs) : "—"}
+                color="silver"
+                href="/display"
+              />
+              <KpiCard
+                label="今日可接待"
+                labelEn="Available Now"
+                value={availableTechs !== null ? String(availableTechs) : "—"}
+                color="green"
+                href="/display?filter=available"
+              />
+              <KpiCard
+                label="本月订单"
+                labelEn="Monthly Orders"
+                value="—"
+                color="red"
+              />
+              <KpiCard
+                label="本月营业额"
+                labelEn="Monthly Revenue"
+                value="—"
+                color="silver"
+              />
+            </div>
+
+            {/* Traffic chart */}
+            <div className="mt-6 brand-card p-4">
+              <div className="mb-3">
+                <p className="text-brand-silver text-sm font-medium">近期每日客流量</p>
+                <p className="text-brand-silver-dim/50 text-xs">
+                  Daily Traffic — Past 7 Days
+                </p>
+              </div>
+              <div className="h-32">
+                <ResponsiveContainer width="100%" height="100%">
+                  <BarChart data={MOCK_TRAFFIC} barSize={16}>
+                    <XAxis
+                      dataKey="day"
+                      tick={{ fill: "#8A8A96", fontSize: 10 }}
+                      axisLine={false}
+                      tickLine={false}
+                    />
+                    <YAxis
+                      tick={{ fill: "#8A8A96", fontSize: 10 }}
+                      axisLine={false}
+                      tickLine={false}
+                      width={25}
+                    />
+                    <Tooltip
+                      contentStyle={{
+                        background: "#120E10",
+                        border: "1px solid rgba(200,24,42,0.3)",
+                        borderRadius: 8,
+                        color: "#F0EEE9",
+                        fontSize: 12,
+                      }}
+                      cursor={{ fill: "rgba(200,24,42,0.1)" }}
+                    />
+                    <Bar
+                      dataKey="orders"
+                      fill="#C8182A"
+                      radius={[3, 3, 0, 0]}
+                      name="订单数"
+                    />
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
+            </div>
+
+            {/* Display screen link */}
+            <a
+              href="/display"
+              target="_blank"
+              className="mt-4 flex items-center gap-2 text-brand-silver-dim/50 hover:text-brand-silver-dim text-sm transition-colors group"
+            >
+              <Monitor className="h-4 w-4 group-hover:text-brand-red transition-colors" />
+              <span>技师展示屏 — 无需登录</span>
+            </a>
+          </div>
         </div>
       </div>
 
@@ -293,11 +315,13 @@ function KpiCard({
   labelEn,
   value,
   color,
+  href,
 }: {
   label: string;
   labelEn: string;
   value: string;
   color: "red" | "green" | "silver";
+  href?: string;
 }) {
   const colors = {
     red: "text-brand-red",
@@ -305,8 +329,8 @@ function KpiCard({
     silver: "text-brand-silver",
   };
 
-  return (
-    <div className="brand-card p-3">
+  const inner = (
+    <div className={`brand-card p-3 h-full transition-all ${href ? "hover:border-brand-red/40 cursor-pointer" : ""}`}>
       <p className={`text-2xl font-bold font-cinzel ${colors[color]}`}>
         {value}
       </p>
@@ -314,4 +338,13 @@ function KpiCard({
       <p className="text-brand-silver-dim/40 text-xs">{labelEn}</p>
     </div>
   );
+
+  if (href) {
+    return (
+      <a href={href} target="_blank" rel="noreferrer" className="block">
+        {inner}
+      </a>
+    );
+  }
+  return inner;
 }
