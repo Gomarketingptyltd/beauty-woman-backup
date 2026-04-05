@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 import { hasPermission } from "@/lib/auth/permissions";
-import { calcTechCommission } from "@/lib/business/commission";
+import { calcTechCommission, calcVipCashback } from "@/lib/business/commission";
 import { todayBusinessDay } from "@/lib/business/business-day";
 import { getPriceInCents } from "@/lib/business/packages";
 import { DEFAULT_AGENT_COMMISSION_CENTS } from "@/lib/business/commission";
@@ -96,6 +96,8 @@ export async function POST(req: NextRequest) {
       member_id,
       payment_method,
       note,
+      // When true: technician is already busy (extend scenario) — skip status checks & updates
+      skip_status_update = false,
     } = body;
 
     // Calculate total
@@ -107,29 +109,36 @@ export async function POST(req: NextRequest) {
     const commissionCents = calcTechCommission(totalCents);
     const businessDay = todayBusinessDay();
 
-    // Get technician to check agent
+    // Get technician (always needed for agent_id)
     const { data: tech } = await supabase
       .from("technicians")
       .select("id,status,agent_id")
       .eq("id", technician_id)
       .single();
 
-    if (!tech || tech.status !== "available") {
-      return NextResponse.json(
-        { error: "Technician not available" },
-        { status: 400 }
-      );
+    if (!tech) {
+      return NextResponse.json({ error: "Technician not found" }, { status: 400 });
     }
 
-    // Check room
-    const { data: room } = await supabase
-      .from("rooms")
-      .select("id,status")
-      .eq("id", room_id)
-      .single();
+    // Status check — skip when extending (tech already busy, room already occupied)
+    if (!skip_status_update) {
+      if (tech.status !== "available") {
+        return NextResponse.json(
+          { error: "Technician not available" },
+          { status: 400 }
+        );
+      }
 
-    if (!room || room.status !== "free") {
-      return NextResponse.json({ error: "Room not available" }, { status: 400 });
+      // Check room
+      const { data: room } = await supabase
+        .from("rooms")
+        .select("id,status")
+        .eq("id", room_id)
+        .single();
+
+      if (!room || room.status !== "free") {
+        return NextResponse.json({ error: "Room not available" }, { status: 400 });
+      }
     }
 
     // Calculate agent commission
@@ -207,17 +216,19 @@ export async function POST(req: NextRequest) {
 
     if (orderError) throw orderError;
 
-    // Update technician status → busy
-    await supabase
-      .from("technicians")
-      .update({ status: "busy" })
-      .eq("id", technician_id);
+    if (!skip_status_update) {
+      // Update technician status → busy
+      await supabase
+        .from("technicians")
+        .update({ status: "busy" })
+        .eq("id", technician_id);
 
-    // Update room → occupied
-    await supabase
-      .from("rooms")
-      .update({ status: "occupied", updated_by: profile.id })
-      .eq("id", room_id);
+      // Update room → occupied
+      await supabase
+        .from("rooms")
+        .update({ status: "occupied", updated_by: profile.id })
+        .eq("id", room_id);
+    }
 
     // Deduct member balance
     if (member_id && (principalUsed > 0 || rewardUsed > 0)) {
