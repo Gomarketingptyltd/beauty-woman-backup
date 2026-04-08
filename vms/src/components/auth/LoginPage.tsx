@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -27,21 +27,24 @@ const schema = z.object({
 
 type FormData = z.infer<typeof schema>;
 
-// Mock traffic data for display — will be real data from API
-const MOCK_TRAFFIC = [
-  { day: "Mon", orders: 18, revenue: 82 },
-  { day: "Tue", orders: 22, revenue: 96 },
-  { day: "Wed", orders: 15, revenue: 68 },
-  { day: "Thu", orders: 28, revenue: 124 },
-  { day: "Fri", orders: 35, revenue: 158 },
-  { day: "Sat", orders: 42, revenue: 189 },
-  { day: "Sun", orders: 38, revenue: 172 },
-];
+interface PublicStats {
+  totalTechs: number;
+  availableTechs: number;
+  traffic: { date: string; day: string; orders: number }[];
+}
 
 export function LoginPage() {
   const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [stats, setStats] = useState<PublicStats | null>(null);
+
+  useEffect(() => {
+    fetch("/api/stats")
+      .then((r) => r.json())
+      .then((data: PublicStats) => setStats(data))
+      .catch(() => {});
+  }, []);
 
   const {
     register,
@@ -115,13 +118,13 @@ export function LoginPage() {
             <KpiCard
               label="技师总数"
               labelEn="Total Technicians"
-              value="20"
+              value={stats ? String(stats.totalTechs) : "—"}
               color="silver"
             />
             <KpiCard
               label="今日可接待"
               labelEn="Available Now"
-              value="—"
+              value={stats ? String(stats.availableTechs) : "—"}
               color="green"
             />
             <KpiCard
@@ -148,7 +151,10 @@ export function LoginPage() {
             </div>
             <div className="h-32">
               <ResponsiveContainer width="100%" height="100%">
-                <BarChart data={MOCK_TRAFFIC} barSize={16}>
+                <BarChart
+                  data={stats?.traffic ?? []}
+                  barSize={16}
+                >
                   <XAxis
                     dataKey="day"
                     tick={{ fill: "#8A8A96", fontSize: 10 }}
@@ -160,6 +166,7 @@ export function LoginPage() {
                     axisLine={false}
                     tickLine={false}
                     width={25}
+                    allowDecimals={false}
                   />
                   <Tooltip
                     contentStyle={{
@@ -315,3 +322,4 @@ function KpiCard({
     </div>
   );
 }
+
