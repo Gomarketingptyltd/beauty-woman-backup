@@ -18,6 +18,8 @@ export interface WizardState {
   member_id: string | null;
   member_name: string | null;
   payment_method: "cash" | "member_account" | "split";
+  split_principal_cents: number;
+  split_reward_cents: number;
   note: string;
 }
 
@@ -37,6 +39,8 @@ const initialState: WizardState = {
   member_id: null,
   member_name: null,
   payment_method: "cash",
+  split_principal_cents: 0,
+  split_reward_cents: 0,
   note: "",
 };
 

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { ChevronLeft, Search, Loader2, UserPlus, CheckCircle2 } from "lucide-react";
+import { ChevronLeft, Search, Loader2, CheckCircle2 } from "lucide-react";
 import { formatAUD } from "@/lib/business/business-day";
 import { getPackage } from "@/lib/business/packages";
 import { calcMemberDeduction } from "@/lib/business/commission";
@@ -30,15 +30,21 @@ export function ConfirmStep({
 
   const pkg = state.package_key ? getPackage(state.package_key) : null;
   const total = state.price ?? 0;
+  const totalCents = total * 100;
 
   const deduction =
     foundMember && state.payment_method === "member_account"
       ? calcMemberDeduction(
-          total * 100,
+          totalCents,
           foundMember.principal_cents,
           foundMember.reward_cents
         )
       : null;
+
+  // Split payment derived values
+  const splitPrincipal = state.split_principal_cents;
+  const splitReward = state.split_reward_cents;
+  const splitCash = Math.max(0, totalCents - splitPrincipal - splitReward);
 
   const handleMemberSearch = async () => {
     if (!memberSearch.trim()) return;
@@ -66,6 +72,19 @@ export function ConfirmStep({
 
   const handleSubmit = async () => {
     if (!state.package_key || !state.duration_minutes || !state.technician || !state.room) return;
+
+    // Validate split amounts
+    if (state.payment_method === "split") {
+      if (splitPrincipal + splitReward > totalCents) {
+        toast.error("会员账户使用金额不能超过订单总价");
+        return;
+      }
+      if (splitPrincipal < 0 || splitReward < 0) {
+        toast.error("金额不能为负数");
+        return;
+      }
+    }
+
     setSubmitting(true);
     try {
       const res = await fetch("/api/orders", {
@@ -78,6 +97,8 @@ export function ConfirmStep({
           room_id: state.room.id,
           member_id: state.member_id,
           payment_method: state.payment_method,
+          principal_used_cents: state.payment_method === "split" ? splitPrincipal : undefined,
+          reward_used_cents: state.payment_method === "split" ? splitReward : undefined,
           note: state.note,
         }),
       });
@@ -123,7 +144,7 @@ export function ConfirmStep({
         <SummaryItem label="房间" value={state.room?.code ?? "—"} />
         <SummaryItem
           label="总价"
-          value={formatAUD(total * 100)}
+          value={formatAUD(totalCents)}
           highlight
         />
       </div>
@@ -171,7 +192,7 @@ export function ConfirmStep({
               <button
                 onClick={() => {
                   setFoundMember(null);
-                  onUpdate({ member_id: null, member_name: null });
+                  onUpdate({ member_id: null, member_name: null, split_principal_cents: 0, split_reward_cents: 0 });
                   setMemberSearch("");
                 }}
                 className="text-xs text-brand-silver-dim hover:text-red-400"
@@ -193,7 +214,7 @@ export function ConfirmStep({
       {foundMember && (
         <div className="mb-4 p-4 rounded-xl bg-noir-700/50 border border-brand-red/15">
           <p className="text-brand-silver text-sm font-medium mb-3">支付方式</p>
-          <div className="flex gap-2">
+          <div className="flex gap-2 mb-3">
             {(["cash", "member_account", "split"] as const).map((method) => (
               <button
                 key={method}
@@ -204,10 +225,12 @@ export function ConfirmStep({
                     : "border-brand-red/15 text-brand-silver-dim hover:border-brand-red/30"
                 }`}
               >
-                {method === "cash" ? "现金" : method === "member_account" ? "会员账户" : "混合"}
+                {method === "cash" ? "现金" : method === "member_account" ? "会员账户" : "混合支付"}
               </button>
             ))}
           </div>
+
+          {/* member_account: show auto-deduction preview */}
           {deduction && state.payment_method === "member_account" && (
             <div className="mt-2 text-xs text-brand-silver-dim space-y-0.5">
               <p>扣本金：{formatAUD(deduction.principal_deducted)}</p>
@@ -219,6 +242,63 @@ export function ConfirmStep({
                   余额不足，需补现金：{formatAUD(deduction.cash_required)}
                 </p>
               )}
+            </div>
+          )}
+
+          {/* split: custom amount inputs */}
+          {state.payment_method === "split" && (
+            <div className="mt-3 space-y-2">
+              <p className="text-xs text-brand-silver-dim mb-1">
+                设置从会员账户扣除的金额（其余补现金）
+              </p>
+              <div className="grid grid-cols-2 gap-2">
+                <div>
+                  <label className="block text-xs text-brand-silver-dim mb-1">
+                    扣本金 (AUD)
+                  </label>
+                  <input
+                    type="number"
+                    min="0"
+                    step="0.01"
+                    value={splitPrincipal > 0 ? (splitPrincipal / 100).toFixed(2) : ""}
+                    onChange={(e) => {
+                      const cents = Math.round(parseFloat(e.target.value || "0") * 100);
+                      onUpdate({ split_principal_cents: Math.max(0, cents) });
+                    }}
+                    placeholder="0.00"
+                    className="w-full px-3 py-2 rounded-lg bg-noir-600 border border-brand-silver-dim/20 text-sm text-foreground placeholder:text-brand-silver-dim/40 focus:outline-none focus:border-brand-red"
+                  />
+                  <p className="text-xs text-brand-silver-dim/50 mt-0.5">
+                    可用：{formatAUD(foundMember.principal_cents)}
+                  </p>
+                </div>
+                <div>
+                  <label className="block text-xs text-brand-silver-dim mb-1">
+                    扣奖励 (AUD)
+                  </label>
+                  <input
+                    type="number"
+                    min="0"
+                    step="0.01"
+                    value={splitReward > 0 ? (splitReward / 100).toFixed(2) : ""}
+                    onChange={(e) => {
+                      const cents = Math.round(parseFloat(e.target.value || "0") * 100);
+                      onUpdate({ split_reward_cents: Math.max(0, cents) });
+                    }}
+                    placeholder="0.00"
+                    className="w-full px-3 py-2 rounded-lg bg-noir-600 border border-brand-silver-dim/20 text-sm text-foreground placeholder:text-brand-silver-dim/40 focus:outline-none focus:border-brand-red"
+                  />
+                  <p className="text-xs text-brand-silver-dim/50 mt-0.5">
+                    可用：{formatAUD(foundMember.reward_cents)}
+                  </p>
+                </div>
+              </div>
+              <div className="flex justify-between text-xs pt-1 border-t border-brand-red/10">
+                <span className="text-brand-silver-dim">需补现金：</span>
+                <span className={splitCash > 0 ? "text-amber-400 font-medium" : "text-green-400 font-medium"}>
+                  {formatAUD(splitCash)}
+                </span>
+              </div>
             </div>
           )}
         </div>
@@ -254,7 +334,7 @@ export function ConfirmStep({
               处理中...
             </>
           ) : (
-            `确认开单 · ${formatAUD(total * 100)}`
+            `确认开单 · ${formatAUD(totalCents)}`
           )}
         </button>
       </div>
@@ -284,3 +364,4 @@ function SummaryItem({
     </div>
   );
 }
+
