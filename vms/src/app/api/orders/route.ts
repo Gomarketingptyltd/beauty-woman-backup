@@ -151,7 +151,7 @@ export async function POST(req: NextRequest) {
     let principalUsed = 0;
     let rewardUsed = 0;
     let cashPaid = totalCents;
-    let isNewCustomer = !member_id;
+    const isNewCustomer = !member_id;
 
     if (member_id && payment_method !== "cash") {
       const { data: member } = await supabase
@@ -225,6 +225,16 @@ export async function POST(req: NextRequest) {
         p_member_id: member_id,
         p_principal_delta: -principalUsed,
         p_reward_delta: -rewardUsed,
+        p_order_id: order.id,
+        p_created_by: profile.id,
+      });
+    }
+
+    // Apply VIP/Board cashback rewards
+    if (member_id) {
+      await supabase.rpc("apply_vip_cashback", {
+        p_member_id: member_id,
+        p_order_total_cents: totalCents,
         p_order_id: order.id,
         p_created_by: profile.id,
       });
