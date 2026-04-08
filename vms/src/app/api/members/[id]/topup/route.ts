@@ -34,38 +34,36 @@ export async function POST(
     const principalDelta = account === "principal" ? amount_cents : 0;
     const rewardDelta = account === "reward" ? amount_cents : 0;
 
-    // Record transaction
-    await supabase.from("member_transactions").insert({
-      member_id: id,
-      tx_type: "topup",
-      principal_delta: principalDelta,
-      reward_delta: rewardDelta,
-      note: note || "充值",
-      created_by: profile.id,
-    });
-
-    // Update balance
-    const { data: member, error } = await supabase
+    // Verify member exists
+    const { data: member, error: memberError } = await supabase
       .from("members")
-      .select("principal_cents,reward_cents")
+      .select("id")
       .eq("id", id)
       .single();
 
-    if (error || !member) {
+    if (memberError || !member) {
       return NextResponse.json({ error: "Member not found" }, { status: 404 });
     }
 
-    const { data: updated, error: updateError } = await supabase
+    // Atomic topup via RPC: updates balance and inserts transaction in one call
+    const { error: rpcError } = await supabase.rpc("topup_member_balance", {
+      p_member_id: id,
+      p_principal_delta: principalDelta,
+      p_reward_delta: rewardDelta,
+      p_created_by: profile.id,
+      p_note: note || "充值",
+    });
+
+    if (rpcError) throw rpcError;
+
+    // Return updated member record
+    const { data: updated, error: fetchError } = await supabase
       .from("members")
-      .update({
-        principal_cents: member.principal_cents + principalDelta,
-        reward_cents: member.reward_cents + rewardDelta,
-      })
+      .select("*")
       .eq("id", id)
-      .select()
       .single();
 
-    if (updateError) throw updateError;
+    if (fetchError) throw fetchError;
 
     return NextResponse.json(updated);
   } catch (e) {
