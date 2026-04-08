@@ -63,8 +63,15 @@ export async function POST(
       .update({ status: "free", updated_by: profile.id })
       .eq("id", order.room_id);
 
-    // Refund member balance if applicable
+    // Refund member balance atomically via RPC (updates balance + records transaction)
     if (order.member_id && (order.principal_used_cents > 0 || order.reward_used_cents > 0)) {
+      await supabase.rpc("refund_member_balance", {
+        p_member_id: order.member_id,
+        p_principal_delta: order.principal_used_cents,
+        p_reward_delta: order.reward_used_cents,
+      });
+
+      // Record the void transaction for audit trail
       await supabase.from("member_transactions").insert({
         member_id: order.member_id,
         tx_type: "void",
@@ -73,20 +80,6 @@ export async function POST(
         order_id: order.id,
         note: `冲正：${reason || "管理员冲正"}`,
         created_by: profile.id,
-      });
-
-      await supabase
-        .from("members")
-        .update({
-          principal_cents: { __increment: order.principal_used_cents },
-        } as Record<string, unknown>)
-        .eq("id", order.member_id);
-
-      // Use separate RPC for atomic update
-      await supabase.rpc("refund_member_balance", {
-        p_member_id: order.member_id,
-        p_principal_delta: order.principal_used_cents,
-        p_reward_delta: order.reward_used_cents,
       });
     }
 
