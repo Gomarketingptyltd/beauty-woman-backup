@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Search, UserPlus, CreditCard, Loader2 } from "lucide-react";
+import { Search, UserPlus, CreditCard, Loader2, Pencil, Check, X } from "lucide-react";
 import { formatAUD } from "@/lib/business/business-day";
 import type { Member, MemberTier } from "@/types";
 import { toast } from "sonner";
@@ -23,6 +23,16 @@ export function MemberPanel() {
   const [topupAccount, setTopupAccount] = useState<"principal" | "reward">("principal");
   const [topupNote, setTopupNote] = useState("");
   const [topping, setTopping] = useState(false);
+
+  // Edit state
+  const [editing, setEditing] = useState(false);
+  const [editForm, setEditForm] = useState<{
+    display_name: string;
+    phone: string;
+    tier: MemberTier;
+    notes: string;
+  }>({ display_name: "", phone: "", tier: "Casual", notes: "" });
+  const [saving, setSaving] = useState(false);
 
   // Create form
   const [form, setForm] = useState({
@@ -83,6 +93,56 @@ export function MemberPanel() {
       toast.error("网络错误");
     } finally {
       setTopping(false);
+    }
+  };
+
+  const startEdit = () => {
+    if (!selected) return;
+    setEditForm({
+      display_name: selected.display_name,
+      phone: selected.phone ?? "",
+      tier: selected.tier,
+      notes: selected.notes ?? "",
+    });
+    setEditing(true);
+  };
+
+  const cancelEdit = () => {
+    setEditing(false);
+  };
+
+  const handleSave = async () => {
+    if (!selected) return;
+    if (!editForm.display_name.trim()) {
+      toast.error("姓名不能为空");
+      return;
+    }
+    setSaving(true);
+    try {
+      const res = await fetch(`/api/members/${selected.id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          display_name: editForm.display_name.trim(),
+          phone: editForm.phone.trim() || null,
+          tier: editForm.tier,
+          notes: editForm.notes.trim() || null,
+        }),
+      });
+      if (!res.ok) {
+        const err = await res.json();
+        toast.error(err.error || "保存失败");
+        return;
+      }
+      const updated = await res.json();
+      setSelected(updated);
+      setResults((prev) => prev.map((m) => (m.id === updated.id ? updated : m)));
+      setEditing(false);
+      toast.success("会员信息已更新");
+    } catch {
+      toast.error("网络错误");
+    } finally {
+      setSaving(false);
     }
   };
 
@@ -164,7 +224,7 @@ export function MemberPanel() {
               {results.map((member) => (
                 <button
                   key={member.id}
-                  onClick={() => setSelected(member)}
+                  onClick={() => { setSelected(member); setEditing(false); }}
                   className={`w-full text-left p-3 rounded-xl border-2 transition-all ${
                     selected?.id === member.id
                       ? "border-brand-red bg-brand-red/10"
@@ -270,91 +330,182 @@ export function MemberPanel() {
         )}
       </div>
 
-      {/* Right: member detail + topup */}
+      {/* Right: member detail + topup + edit */}
       {selected ? (
         <div className="brand-card p-5">
-          <div className="flex items-start justify-between mb-4">
-            <div>
-              <h3 className="font-cinzel text-xl font-bold silver-text">
-                {selected.display_name}
-              </h3>
-              <p className="text-brand-silver-dim text-sm">
-                会员 {selected.code} · {selected.phone || "无手机"}
-              </p>
-            </div>
-            <span
-              className={`text-sm px-3 py-1 rounded-full border ${TIER_COLORS[selected.tier]}`}
-            >
-              {selected.tier}
-            </span>
-          </div>
+          {!editing ? (
+            <>
+              <div className="flex items-start justify-between mb-4">
+                <div>
+                  <h3 className="font-cinzel text-xl font-bold silver-text">
+                    {selected.display_name}
+                  </h3>
+                  <p className="text-brand-silver-dim text-sm">
+                    会员 {selected.code} · {selected.phone || "无手机"}
+                  </p>
+                  {selected.notes && (
+                    <p className="text-brand-silver-dim/60 text-xs mt-1 italic">
+                      {selected.notes}
+                    </p>
+                  )}
+                </div>
+                <div className="flex items-center gap-2">
+                  <span
+                    className={`text-sm px-3 py-1 rounded-full border ${TIER_COLORS[selected.tier]}`}
+                  >
+                    {selected.tier}
+                  </span>
+                  <button
+                    onClick={startEdit}
+                    className="p-1.5 rounded-lg text-brand-silver-dim hover:text-brand-silver hover:bg-brand-silver-dim/10 transition-all"
+                    title="修改信息"
+                  >
+                    <Pencil className="h-4 w-4" />
+                  </button>
+                </div>
+              </div>
 
-          {/* Balance */}
-          <div className="grid grid-cols-2 gap-3 mb-5">
-            <div className="p-4 rounded-xl bg-noir-700 border border-brand-red/15 text-center">
-              <p className="text-xs text-brand-silver-dim mb-1">本金余额</p>
-              <p className="text-2xl font-bold text-brand-silver">
-                {formatAUD(selected.principal_cents)}
-              </p>
-            </div>
-            <div className="p-4 rounded-xl bg-noir-700 border border-brand-red/15 text-center">
-              <p className="text-xs text-brand-silver-dim mb-1">奖励余额</p>
-              <p className="text-2xl font-bold text-amber-400">
-                {formatAUD(selected.reward_cents)}
-              </p>
-            </div>
-          </div>
+              {/* Balance */}
+              <div className="grid grid-cols-2 gap-3 mb-5">
+                <div className="p-4 rounded-xl bg-noir-700 border border-brand-red/15 text-center">
+                  <p className="text-xs text-brand-silver-dim mb-1">本金余额</p>
+                  <p className="text-2xl font-bold text-brand-silver">
+                    {formatAUD(selected.principal_cents)}
+                  </p>
+                </div>
+                <div className="p-4 rounded-xl bg-noir-700 border border-brand-red/15 text-center">
+                  <p className="text-xs text-brand-silver-dim mb-1">奖励余额</p>
+                  <p className="text-2xl font-bold text-amber-400">
+                    {formatAUD(selected.reward_cents)}
+                  </p>
+                </div>
+              </div>
 
-          {/* Topup */}
-          <div className="border-t border-brand-red/10 pt-4">
-            <h4 className="text-brand-silver font-medium mb-3 flex items-center gap-2">
-              <CreditCard className="h-4 w-4 text-brand-red" />
-              充值
-            </h4>
-            <div className="flex gap-2 mb-3">
-              {(["principal", "reward"] as const).map((acc) => (
+              {/* Topup */}
+              <div className="border-t border-brand-red/10 pt-4">
+                <h4 className="text-brand-silver font-medium mb-3 flex items-center gap-2">
+                  <CreditCard className="h-4 w-4 text-brand-red" />
+                  充值
+                </h4>
+                <div className="flex gap-2 mb-3">
+                  {(["principal", "reward"] as const).map((acc) => (
+                    <button
+                      key={acc}
+                      onClick={() => setTopupAccount(acc)}
+                      className={`flex-1 py-2 rounded-lg text-sm border-2 transition-all ${
+                        topupAccount === acc
+                          ? "border-brand-red bg-brand-red/10 text-brand-red"
+                          : "border-brand-red/15 text-brand-silver-dim hover:border-brand-red/30"
+                      }`}
+                    >
+                      {acc === "principal" ? "充入本金" : "充入奖励"}
+                    </button>
+                  ))}
+                </div>
+                <div className="flex gap-2 mb-2">
+                  <input
+                    value={topupAmount}
+                    onChange={(e) => setTopupAmount(e.target.value)}
+                    placeholder="金额 (AUD)"
+                    type="number"
+                    min="0"
+                    step="0.01"
+                    className="flex-1 px-3 py-2 rounded-lg bg-noir-700 border border-brand-silver-dim/20 text-sm text-foreground placeholder:text-brand-silver-dim/40 focus:outline-none focus:border-brand-red"
+                  />
+                </div>
+                <input
+                  value={topupNote}
+                  onChange={(e) => setTopupNote(e.target.value)}
+                  placeholder="备注（可选）"
+                  className="w-full px-3 py-2 rounded-lg bg-noir-700 border border-brand-silver-dim/20 text-sm text-foreground placeholder:text-brand-silver-dim/40 focus:outline-none focus:border-brand-red mb-3"
+                />
                 <button
-                  key={acc}
-                  onClick={() => setTopupAccount(acc)}
-                  className={`flex-1 py-2 rounded-lg text-sm border-2 transition-all ${
-                    topupAccount === acc
-                      ? "border-brand-red bg-brand-red/10 text-brand-red"
-                      : "border-brand-red/15 text-brand-silver-dim hover:border-brand-red/30"
-                  }`}
+                  onClick={handleTopup}
+                  disabled={topping || !topupAmount}
+                  className="btn-brand w-full flex items-center justify-center gap-2"
                 >
-                  {acc === "principal" ? "充入本金" : "充入奖励"}
+                  {topping ? (
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                  ) : (
+                    "确认充值"
+                  )}
                 </button>
-              ))}
+              </div>
+            </>
+          ) : (
+            /* Edit form */
+            <div>
+              <div className="flex items-center justify-between mb-5">
+                <h3 className="font-cinzel text-lg font-bold silver-text">修改会员信息</h3>
+                <button onClick={cancelEdit} className="text-brand-silver-dim hover:text-red-400 transition-colors">
+                  <X className="h-5 w-5" />
+                </button>
+              </div>
+              <div className="space-y-3">
+                <div>
+                  <label className="block text-xs text-brand-silver-dim mb-1">姓名 *</label>
+                  <input
+                    value={editForm.display_name}
+                    onChange={(e) => setEditForm((f) => ({ ...f, display_name: e.target.value }))}
+                    className="w-full px-3 py-2 rounded-lg bg-noir-700 border border-brand-silver-dim/20 text-sm text-foreground focus:outline-none focus:border-brand-red"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs text-brand-silver-dim mb-1">手机号</label>
+                  <input
+                    value={editForm.phone}
+                    onChange={(e) => setEditForm((f) => ({ ...f, phone: e.target.value }))}
+                    placeholder="04XXXXXXXX"
+                    className="w-full px-3 py-2 rounded-lg bg-noir-700 border border-brand-silver-dim/20 text-sm text-foreground placeholder:text-brand-silver-dim/40 focus:outline-none focus:border-brand-red"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs text-brand-silver-dim mb-1">会员等级</label>
+                  <select
+                    value={editForm.tier}
+                    onChange={(e) => setEditForm((f) => ({ ...f, tier: e.target.value as MemberTier }))}
+                    className="w-full px-3 py-2 rounded-lg bg-noir-700 border border-brand-silver-dim/20 text-sm text-foreground focus:outline-none focus:border-brand-red"
+                  >
+                    <option value="Casual">Casual — 散客</option>
+                    <option value="Standard">Standard — 普通会员</option>
+                    <option value="VIP">VIP — 高级会员</option>
+                    <option value="Board">Board — 董事会员</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-xs text-brand-silver-dim mb-1">备注</label>
+                  <textarea
+                    value={editForm.notes}
+                    onChange={(e) => setEditForm((f) => ({ ...f, notes: e.target.value }))}
+                    rows={2}
+                    className="w-full px-3 py-2 rounded-lg bg-noir-700 border border-brand-silver-dim/20 text-sm text-foreground placeholder:text-brand-silver-dim/40 focus:outline-none focus:border-brand-red resize-none"
+                  />
+                </div>
+                <div className="flex gap-2 pt-1">
+                  <button
+                    onClick={cancelEdit}
+                    className="flex-1 py-2 rounded-lg border border-brand-silver-dim/20 text-brand-silver-dim hover:text-brand-silver transition-colors text-sm"
+                  >
+                    取消
+                  </button>
+                  <button
+                    onClick={handleSave}
+                    disabled={saving}
+                    className="flex-1 btn-brand flex items-center justify-center gap-2 py-2"
+                  >
+                    {saving ? (
+                      <Loader2 className="h-4 w-4 animate-spin" />
+                    ) : (
+                      <>
+                        <Check className="h-4 w-4" />
+                        保存
+                      </>
+                    )}
+                  </button>
+                </div>
+              </div>
             </div>
-            <div className="flex gap-2 mb-2">
-              <input
-                value={topupAmount}
-                onChange={(e) => setTopupAmount(e.target.value)}
-                placeholder="金额 (AUD)"
-                type="number"
-                min="0"
-                step="0.01"
-                className="flex-1 px-3 py-2 rounded-lg bg-noir-700 border border-brand-silver-dim/20 text-sm text-foreground placeholder:text-brand-silver-dim/40 focus:outline-none focus:border-brand-red"
-              />
-            </div>
-            <input
-              value={topupNote}
-              onChange={(e) => setTopupNote(e.target.value)}
-              placeholder="备注（可选）"
-              className="w-full px-3 py-2 rounded-lg bg-noir-700 border border-brand-silver-dim/20 text-sm text-foreground placeholder:text-brand-silver-dim/40 focus:outline-none focus:border-brand-red mb-3"
-            />
-            <button
-              onClick={handleTopup}
-              disabled={topping || !topupAmount}
-              className="btn-brand w-full flex items-center justify-center gap-2"
-            >
-              {topping ? (
-                <Loader2 className="h-4 w-4 animate-spin" />
-              ) : (
-                "确认充值"
-              )}
-            </button>
-          </div>
+          )}
         </div>
       ) : (
         <div className="brand-card p-8 flex flex-col items-center justify-center text-center text-brand-silver-dim">
@@ -366,3 +517,4 @@ export function MemberPanel() {
     </div>
   );
 }
+
