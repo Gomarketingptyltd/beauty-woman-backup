@@ -1,0 +1,25 @@
+@import "tailwindcss";
+
+:root {
+  /* 深沉午夜蓝 + 香槟金点缀（高端、高信息密度） */
+  --bhh-bg: #0f172a;
+  --bhh-surface: #1e293b;
+  --bhh-border: rgba(148, 163, 184, 0.22);
+  --bhh-fg: #f8fafc;
+  --bhh-muted: #94a3b8;
+  --bhh-gold: #fbbf24;
+  --bhh-accent: #a78bfa;
+}
+
+@theme inline {
+  --color-background: var(--bhh-bg);
+  --color-foreground: var(--bhh-fg);
+  --font-sans: var(--font-noto-sc), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--bhh-bg);
+  color: var(--bhh-fg);
+  font-family: var(--font-noto-sc), ui-sans-serif, system-ui, sans-serif;
+}
