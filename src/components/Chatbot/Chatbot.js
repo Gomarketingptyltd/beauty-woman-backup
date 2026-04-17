@@ -67,8 +67,8 @@ export default function Chatbot() {
 
   const greet = useCallback(() => {
     const g = lang === 'zh'
-      ? '您好，老板！我是小乔 🖤 夜色宫专属智能管家，有什么想了解的尽管问～'
-      : 'Hello! I\'m Qiao 🖤 Ocean Noir\'s virtual concierge — ask me anything.';
+      ? '您好！我是 Ocean Noir 智能管家（也可叫我小乔 🖤）——会所、预订、会员与守则都可以问我。'
+      : 'Hello! I\'m the Ocean Noir Assistant (you can also call me Qiao 🖤) — ask about the venue, bookings, membership, or house rules.';
     setMsgs([{ type: 'bot', text: g, id: Date.now() }]);
   }, [lang]);
 
@@ -172,7 +172,7 @@ export default function Chatbot() {
                 <span className="cb-header__name">OCEAN NOIR</span>
                 <span className="cb-header__status">
                   <span className="cb-header__dot" />
-                  {lang === 'zh' ? '小乔 · 智能管家' : 'Qiao · Virtual Concierge'}
+                  {lang === 'zh' ? 'Ocean Noir · 智能管家' : 'Ocean Noir · Assistant'}
                 </span>
               </div>
               <button className="cb-header__close" onClick={() => setOpen(false)}>✕</button>
