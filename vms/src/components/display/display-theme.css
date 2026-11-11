@@ -1,0 +1,165 @@
+/* Display / kiosk listing — keep sticky reception bar from covering cards */
+
+:root {
+  --display-reception-bar-h: 56px;
+}
+
+.display-screen {
+  min-height: 100vh;
+  min-height: 100dvh;
+  max-height: 100vh;
+  max-height: 100dvh;
+  background: #080608;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.display-screen__main {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  /* Comfort space above the in-flow reception footer */
+  padding-bottom: 20px !important;
+}
+
+.display-reception-bar {
+  /* In-flow flex footer — never overlays card photos or age/height/cup */
+  position: relative;
+  flex: 0 0 auto;
+  z-index: 40;
+  min-height: var(--display-reception-bar-h);
+  padding: 12px 16px calc(12px + env(safe-area-inset-bottom, 0px));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: rgba(14, 10, 24, 0.96);
+  border-top: 1px solid rgba(201, 168, 76, 0.35);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  color: #c9a84c;
+  text-decoration: none;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.display-reception-bar:hover {
+  color: #e4c46e;
+  background: rgba(20, 14, 32, 0.98);
+}
+
+.display-reception-bar__label {
+  opacity: 0.9;
+}
+
+.display-reception-bar__phone {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.12em;
+}
+
+/* Cards: meta sits under the photo, not overlaid on it */
+.tech-card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: #14101c;
+  border: 1px solid rgba(201, 168, 76, 0.18);
+  height: auto;
+  aspect-ratio: auto;
+}
+
+.tech-card__photo {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  background: #120e1c;
+  flex-shrink: 0;
+}
+
+.tech-card__meta {
+  padding: 10px 12px 14px;
+  background: linear-gradient(180deg, #16101f, #120e1c);
+}
+
+.tech-card__stats {
+  margin-top: 6px;
+  color: rgba(232, 232, 240, 0.72);
+  font-size: 0.74rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  line-height: 1.4;
+}
+
+.tech-card__price {
+  color: #c9a84c;
+  font-family: Cinzel, serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.tech-card__price em {
+  font-style: normal;
+  font-family: Inter, sans-serif;
+  font-size: 0.66rem;
+  font-weight: 500;
+  color: rgba(232, 232, 240, 0.62);
+  margin-left: 4px;
+}
+
+/* Profile modal: CTA is in-flow (flex footer), never overlays photo/stats */
+.tech-modal__shell {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  max-height: 100dvh;
+  overflow: hidden;
+}
+
+.tech-modal__body {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  /* Extra air so the last stats row is not tight against the CTA */
+  padding-bottom: 12px;
+}
+
+.tech-modal__cta {
+  flex: 0 0 auto;
+  display: block;
+  margin: 0;
+  padding: 14px 12px calc(14px + env(safe-area-inset-bottom, 0px));
+  text-align: center;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  background: #c9a84c;
+  color: #0a0810;
+  font-size: 0.8rem;
+  text-decoration: none;
+  border-top: 1px solid rgba(201, 168, 76, 0.35);
+}
+
+.tech-modal__cta:hover {
+  background: #e4c46e;
+}
+
+@media (max-width: 640px) {
+  :root {
+    --display-reception-bar-h: 52px;
+  }
+
+  .display-reception-bar {
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+  }
+}
